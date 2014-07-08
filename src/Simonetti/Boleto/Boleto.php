@@ -1,5 +1,10 @@
 <?php
 
+namespace Simonetti\Boleto;
+
+use Simonetti\Boleto\Util\Modulo;
+use Simonetti\Boleto\Util\Data;
+
 class Boleto
 {
     /**
@@ -74,7 +79,7 @@ class Boleto
     }
 
     /**
-     * @return \Banco
+     * @return Banco
      */
     public function getBanco()
     {
@@ -84,7 +89,7 @@ class Boleto
     /**
      * @param \DateTime $dataDocumento
      */
-    public function setDataDocumento($dataDocumento)
+    public function setDataDocumento(\DateTime $dataDocumento)
     {
         $this->dataDocumento = $dataDocumento;
     }
@@ -100,7 +105,7 @@ class Boleto
     /**
      * @param \DateTime $dataProcessamento
      */
-    public function setDataProcessamento($dataProcessamento)
+    public function setDataProcessamento(\DateTime $dataProcessamento)
     {
         $this->dataProcessamento = $dataProcessamento;
     }
@@ -116,7 +121,7 @@ class Boleto
     /**
      * @param \DateTime $dataVencimento
      */
-    public function setDataVencimento($dataVencimento)
+    public function setDataVencimento(\DateTime $dataVencimento)
     {
         $this->dataVencimento = $dataVencimento;
     }
@@ -137,6 +142,11 @@ class Boleto
         $this->demonstrativos = $demonstrativos;
     }
 
+    public function addDemostrativo($demonstrativo)
+    {
+        $this->demonstrativos[] = $demonstrativo;
+    }
+
     /**
      * @return array
      */
@@ -146,7 +156,7 @@ class Boleto
     }
 
     /**
-     * @param \Cedente $cedente
+     * @param Cedente $cedente
      */
     public function setCedente($cedente)
     {
@@ -154,7 +164,7 @@ class Boleto
     }
 
     /**
-     * @return \Cedente
+     * @return Cedente
      */
     public function getCedente()
     {
@@ -167,6 +177,11 @@ class Boleto
     public function setInstrucoes($instrucoes)
     {
         $this->instrucoes = $instrucoes;
+    }
+
+    public function addInstrucao($instrucao)
+    {
+        $this->instrucoes[] = $instrucao;
     }
 
     /**
@@ -241,13 +256,23 @@ class Boleto
         return $this->valorBoleto;
     }
 
+    /**
+     * @return int
+     */
+    public function getValorBoletoSemVirgula()
+    {
+        //valor tem 10 digitos, sem virgula
+        return $this->formataNumero($this->valorBoleto,10,0,"valor");
+    }
+
+
 
     public function getFatorVencimento() {
-        $data = explode("/",$this->getDataVencimento());
+        $data = explode("/",$this->getDataVencimento()->format('d/m/Y'));
         $ano = $data[2];
         $mes = $data[1];
         $dia = $data[0];
-        return(abs((_dateToDays("1997","10","07")) - (_dateToDays($ano, $mes, $dia))));
+        return(abs((Data::_dateToDays("1997","10","07")) - (Data::_dateToDays($ano, $mes, $dia))));
     }
 
 
@@ -255,14 +280,15 @@ class Boleto
      * @return DIgitoVerificadorBarra
      */
     public function getDigitoVerificadorBarra() {
-        $numero = $this->banco->geraCodigoBanco().$this->getNumeroMoeda().$this->getFatorVencimento().$this->getValorBoleto().$this->cedente->getAgencia().$this->getNossoNumeroComDigitoVerificador().$this->cedente->getConta().'0';
+        $numero = $this->banco->geraCodigoBanco().$this->getNumeroMoeda().$this->getFatorVencimento().$this->getValorBoletoSemVirgula().$this->cedente->getAgencia().$this->getNossoNumeroComDigitoVerificador().$this->formataNumero($this->cedente->getConta(),7,0).'0';
 
-        $resto2 = modulo_11($numero, 9, 1);
+        $resto2 = Modulo::modulo11($numero, 9, 1);
         if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
             $dv = 1;
         } else {
             $dv = 11 - $resto2;
         }
+
         return $dv;
     }
 
@@ -296,7 +322,7 @@ class Boleto
     }
 
     public function digitoVerificadorNossonumero($numero) {
-        $resto2 = modulo_11($numero, 9, 1);
+        $resto2 = Modulo::modulo11($numero, 9, 1);
         $digito = 11 - $resto2;
         if ($digito == 10 || $digito == 11) {
             $dv = 0;
@@ -317,12 +343,24 @@ class Boleto
         return $this->digitoVerificadorNossonumero($nnum);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCarteiraENossoNumeroComDigitoVerificador()
+    {
+        $num = $this->formataNumero($this->banco->getCarteira(),2,0).$this->formataNumero($this->getNossoNumero(),11,0);
+
+        return substr($num,0,2).'/'.substr($num,2).'-'.$this->digitoVerificadorNossonumero($num);
+    }
+
+
+
 
     public function gerarLinhaDigitavel() {
 
         $nnum = $this->formataNumero($this->banco->getCarteira(),2,0).$this->formataNumero($this->getNossoNumero(),11,0);
-
-        $codigo = $this->banco->getCodigo().$this->getNumeroMoeda().$this->getDigitoVerificadorBarra().$this->getFatorVencimento().$this->valorBoleto.$this->cedente->getAgencia().$nnum.$this->cedente->getConta()."0";;
+echo $this->getDigitoVerificadorBarra();
+        $codigo = $this->banco->getCodigo().$this->getNumeroMoeda().$this->getDigitoVerificadorBarra().$this->getFatorVencimento().$this->getValorBoletoSemVirgula().$this->cedente->getAgencia().$nnum.$this->formataNumero($this->cedente->getConta(),7,0)."0";;
 
         // Posição 	Conteúdo
         // 1 a 3    Número do banco
@@ -336,7 +374,7 @@ class Boleto
         // do campo livre e DV (modulo10) deste campo
         $p1 = substr($codigo, 0, 4);
         $p2 = substr($codigo, 19, 5);
-        $p3 = modulo_10("$p1$p2");
+        $p3 = Modulo::modulo10("$p1$p2");
         $p4 = "$p1$p2$p3";
         $p5 = substr($p4, 0, 5);
         $p6 = substr($p4, 5);
@@ -345,7 +383,7 @@ class Boleto
         // 2. Campo - composto pelas posiçoes 6 a 15 do campo livre
         // e livre e DV (modulo10) deste campo
         $p1 = substr($codigo, 24, 10);
-        $p2 = modulo_10($p1);
+        $p2 = Modulo::modulo10($p1);
         $p3 = "$p1$p2";
         $p4 = substr($p3, 0, 5);
         $p5 = substr($p3, 5);
@@ -354,7 +392,7 @@ class Boleto
         // 3. Campo composto pelas posicoes 16 a 25 do campo livre
         // e livre e DV (modulo10) deste campo
         $p1 = substr($codigo, 34, 10);
-        $p2 = modulo_10($p1);
+        $p2 = Modulo::modulo10($p1);
         $p3 = "$p1$p2";
         $p4 = substr($p3, 0, 5);
         $p5 = substr($p3, 5);

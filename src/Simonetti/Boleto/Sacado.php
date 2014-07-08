@@ -1,5 +1,7 @@
 <?php
 
+namespace Simonetti\Boleto;
+
 class Sacado
 {
     /**

@@ -1,6 +1,10 @@
 <?php
 
-class Banco
+namespace Simonetti\Boleto;
+
+use Simonetti\Boleto\Util\Modulo;
+
+abstract class Banco
 {
 
     /**
@@ -43,8 +47,15 @@ class Banco
      */
     private $localPagamento;
 
+    public function __construct()
+    {
+        $this->init();
+    }
+
+    protected abstract function init();
+
     /**
-     * @param \Carteira $carteira
+     * @param string $carteira
      */
     public function setCarteira($carteira)
     {
@@ -52,7 +63,7 @@ class Banco
     }
 
     /**
-     * @return \Carteira
+     * @return string
      */
     public function getCarteira()
     {
@@ -60,7 +71,7 @@ class Banco
     }
 
     /**
-     * @param \Especie $especie
+     * @param string $especie
      */
     public function setEspecie($especie)
     {
@@ -68,7 +79,7 @@ class Banco
     }
 
     /**
-     * @return \Especie
+     * @return string
      */
     public function getEspecie()
     {
@@ -76,7 +87,7 @@ class Banco
     }
 
     /**
-     * @param \Especie $especieDocumento
+     * @param string $especieDocumento
      */
     public function setEspecieDocumento($especieDocumento)
     {
@@ -84,7 +95,7 @@ class Banco
     }
 
     /**
-     * @return \Especie
+     * @return string
      */
     public function getEspecieDocumento()
     {
@@ -92,7 +103,7 @@ class Banco
     }
 
     /**
-     * @param \Local $localPagamento
+     * @param string $localPagamento
      */
     public function setLocalPagamento($localPagamento)
     {
@@ -100,7 +111,7 @@ class Banco
     }
 
     /**
-     * @return \Local
+     * @return string
      */
     public function getLocalPagamento()
     {
@@ -108,7 +119,7 @@ class Banco
     }
 
     /**
-     * @param \Logomarca $logomarca
+     * @param string $logomarca
      */
     public function setLogomarca($logomarca)
     {
@@ -116,7 +127,7 @@ class Banco
     }
 
     /**
-     * @return \Logomarca
+     * @return string
      */
     public function getLogomarca()
     {
@@ -124,7 +135,7 @@ class Banco
     }
 
     /**
-     * @param \Nome $nome
+     * @param string $nome
      */
     public function setNome($nome)
     {
@@ -132,7 +143,7 @@ class Banco
     }
 
     /**
-     * @return \Nome
+     * @return string
      */
     public function getNome()
     {
@@ -140,7 +151,7 @@ class Banco
     }
 
     /**
-     * @param \Código $codigo
+     * @param string $codigo
      */
     public function setCodigo($codigo)
     {
@@ -148,7 +159,7 @@ class Banco
     }
 
     /**
-     * @return \Código
+     * @return string
      */
     public function getCodigo()
     {
@@ -156,7 +167,7 @@ class Banco
     }
 
     /**
-     * @param \Dígito $digitoVerificador
+     * @param string $digitoVerificador
      */
     public function setDigitoVerificador($digitoVerificador)
     {
@@ -164,7 +175,7 @@ class Banco
     }
 
     /**
-     * @return \Dígito
+     * @return string
      */
     public function getDigitoVerificador()
     {
@@ -172,22 +183,19 @@ class Banco
     }
 
     /**
-     * @return \ Codigo com Dígito
+     * @return string
      */
     public function getCodigoComDigitoVerificador()
     {
         return $this->geraCodigoBanco();
     }
 
-    function geraCodigoBanco() {
+    public function geraCodigoBanco()
+    {
         $parte1 = substr($this->codigo, 0, 3);
-        $parte2 = modulo_11($parte1);
+        $parte2 = Modulo::modulo11($parte1);
         return $parte1 . "-" . $parte2;
     }
-
-
-
-
 
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace Simonetti\Boleto;
+
 class Cedente
 {
     /**
@@ -190,6 +192,25 @@ class Cedente
     {
         return $this->uf;
     }
+
+    /**
+     * @return Agência com Dv
+     */
+    public function getAgenciaComDv()
+    {
+        return $this->agencia."-".$this->dvAgencia;
+    }
+
+    /**
+     * @return Conta com Dv
+     */
+    public function getContaComDv()
+    {
+        //ormata_numero($dadosboleto["conta_cedente"],7,0);
+        //$conta_cedente_dv = formata_numero($dadosboleto["conta_cedente_dv"],1,0);
+        return $this->conta."-".$this->dvConta;
+    }
+
 
 
 }
