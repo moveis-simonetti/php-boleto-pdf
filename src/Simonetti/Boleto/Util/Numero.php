@@ -2,14 +2,16 @@
 namespace Simonetti\Boleto\Util;
 
 
-class Numero {
+class Numero
+{
     /**
      * @return Número formatado
      */
-    public function formataNumero($numero,$loop,$insert,$tipo = "geral") {
+    public static function formataNumero($numero, $loop, $insert, $tipo = "geral")
+    {
         if ($tipo == "geral") {
-            $numero = str_replace(",","",$numero);
-            while(strlen($numero)<$loop){
+            $numero = str_replace(",", "", $numero);
+            while (strlen($numero) < $loop) {
                 $numero = $insert . $numero;
             }
         }
@@ -19,13 +21,13 @@ class Numero {
             formata o numero
             preenche com zeros
             */
-            $numero = str_replace(",","",$numero);
-            while(strlen($numero)<$loop){
+            $numero = str_replace(",", "", $numero);
+            while (strlen($numero) < $loop) {
                 $numero = $insert . $numero;
             }
         }
         if ($tipo == "convenio") {
-            while(strlen($numero)<$loop){
+            while (strlen($numero) < $loop) {
                 $numero = $numero . $insert;
             }
         }

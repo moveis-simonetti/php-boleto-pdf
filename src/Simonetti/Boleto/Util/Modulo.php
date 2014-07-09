@@ -61,19 +61,22 @@ class Modulo
         }
     }
 
-    public static function modulo10($num) {
+    public static function modulo10($num)
+    {
         $numtotal10 = 0;
         $fator = 2;
 
         // Separacao dos numeros
         for ($i = strlen($num); $i > 0; $i--) {
             // pega cada numero isoladamente
-            $numeros[$i] = substr($num,$i-1,1);
+            $numeros[$i] = substr($num, $i - 1, 1);
             // Efetua multiplicacao do numero pelo (falor 10)
             // 2002-07-07 01:33:34 Macete para adequar ao Mod10 do Itaú
             $temp = $numeros[$i] * $fator;
-            $temp0=0;
-            foreach (preg_split('//',$temp,-1,PREG_SPLIT_NO_EMPTY) as $k=>$v){ $temp0+=$v; }
+            $temp0 = 0;
+            foreach (preg_split('//', $temp, -1, PREG_SPLIT_NO_EMPTY) as $k => $v) {
+                $temp0 += $v;
+            }
             $parcial10[$i] = $temp0; //$numeros[$i] * $fator;
             // monta sequencia para soma dos digitos no (modulo 10)
             $numtotal10 += $parcial10[$i];
