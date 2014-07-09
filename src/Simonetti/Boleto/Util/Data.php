@@ -3,9 +3,11 @@
 namespace Simonetti\Boleto\Util;
 
 
-class Data {
+class Data
+{
 
-    function _dateToDays($year,$month,$day) {
+    public static function _dateToDays($year, $month, $day)
+    {
         $century = substr($year, 0, 2);
         $year = substr($year, 2, 2);
         if ($month > 2) {
@@ -16,12 +18,12 @@ class Data {
                 $year--;
             } else {
                 $year = 99;
-                $century --;
+                $century--;
             }
         }
-        return ( floor((  146097 * $century)    /  4 ) +
-            floor(( 1461 * $year)        /  4 ) +
-            floor(( 153 * $month +  2) /  5 ) +
-            $day +  1721119);
+        return (floor((146097 * $century) / 4) +
+            floor((1461 * $year) / 4) +
+            floor((153 * $month + 2) / 5) +
+            $day + 1721119);
     }
 } 

@@ -200,7 +200,7 @@ class Cedente
      */
     public function getAgenciaComDv()
     {
-        return $this->agencia."-".$this->dvAgencia;
+        return $this->agencia . "-" . $this->dvAgencia;
     }
 
     /**
@@ -208,11 +208,10 @@ class Cedente
      */
     public function getContaComDv()
     {
-        $conta = Numero::formataNumero($this->getConta(),7,0);
-        $dv = Numero::formataNumero($this->dvConta,1,0);
-        return $conta."-".$dv;
+        $conta = Numero::formataNumero($this->getConta(), 7, 0);
+        $dv = Numero::formataNumero($this->dvConta, 1, 0);
+        return $conta . "-" . $dv;
     }
-
 
 
 }
