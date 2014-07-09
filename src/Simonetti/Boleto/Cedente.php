@@ -2,6 +2,8 @@
 
 namespace Simonetti\Boleto;
 
+use Simonetti\Boleto\Util\Numero;
+
 class Cedente
 {
     /**
@@ -206,9 +208,9 @@ class Cedente
      */
     public function getContaComDv()
     {
-        //ormata_numero($dadosboleto["conta_cedente"],7,0);
-        //$conta_cedente_dv = formata_numero($dadosboleto["conta_cedente_dv"],1,0);
-        return $this->conta."-".$this->dvConta;
+        $conta = Numero::formataNumero($this->getConta(),7,0);
+        $dv = Numero::formataNumero($this->dvConta,1,0);
+        return $conta."-".$dv;
     }
 
 

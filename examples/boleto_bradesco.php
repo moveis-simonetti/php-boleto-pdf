@@ -7,7 +7,7 @@ $oBoleto = new \Simonetti\Boleto\Boleto();
 $oBoleto->setBanco(new \Simonetti\Boleto\Banco\Bradesco());
 
 $oBoleto->setNumeroMoeda("9");
-$oBoleto->setDataVencimento(DateTime::createFromFormat('d/m/Y', "15/07/2014"));
+$oBoleto->setDataVencimento(DateTime::createFromFormat('d/m/Y', "07/07/2014"));
 $oBoleto->setDataDocumento(DateTime::createFromFormat('d/m/Y', "10/07/2014"));
 $oBoleto->setDataProcessamento(DateTime::createFromFormat('d/m/Y', "10/07/2014"));
 $oBoleto->addDemostrativo('Pagamento de Compra na Móveis Simonetti');

@@ -189,20 +189,21 @@ class GeradorBoleto
 
             $l ++;
             $PDF->Cell(130, 5, utf8_decode($instrucao), 'L', 0, 'L');
+
             if(1 == $l)
             {
                 $PDF->Cell(60, 5, '', 'LB', 1, 'R');
             }
-            elseif(2 == $l)
+            else if(2 == $l)
             {
                 $PDF->SetFont('Arial', '', 6);
                 $PDF->Cell(60, 3, utf8_decode('(-)Outras deduções'), 'L', 1, 'L');
             }
-            elseif(3 == $l)
+            else if(3 == $l)
             {
                 $PDF->Cell(60, 5, '', 'LB', 1, 'R');
             }
-            elseif(4 == $l)
+            else if(4 == $l)
             {
                 $PDF->SetFont('Arial', '', 6);
                 $PDF->Cell(60, 3, '(+)Mora/Multa', 'L', 1, 'L');
@@ -240,7 +241,7 @@ class GeradorBoleto
         $PDF->Cell(170, 3, 'Sacador/Avalista', '', 0, 'L');
         $PDF->Cell(20, 3, utf8_decode('Autênticação Mecânica - Ficha de Compensação'), '', 1, 'R');
 
-        $this->fbarcode($boleto->gerarLinhaDigitavel(), $PDF);
+        $this->fbarcode($boleto->getLinha(), $PDF);
 
         $PDF->Ln(10);
         $PDF->SetY(260);
@@ -255,7 +256,7 @@ class GeradorBoleto
     public function fbarcode($valor, FPDF $PDF)
     {
         $fino = UnidadeMedida::px2milimetros(1); // valores em px
-        $largo = UnidadeMedida::px2milimetros(3); // valor em px
+        $largo = UnidadeMedida::px2milimetros(2.3); // valor em px
         $altura = UnidadeMedida::px2milimetros(40); // valor em px
 
         $barcodes[0] = "00110" ;

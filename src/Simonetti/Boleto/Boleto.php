@@ -4,6 +4,7 @@ namespace Simonetti\Boleto;
 
 use Simonetti\Boleto\Util\Modulo;
 use Simonetti\Boleto\Util\Data;
+use Simonetti\Boleto\Util\Numero;
 
 class Boleto
 {
@@ -262,7 +263,7 @@ class Boleto
     public function getValorBoletoSemVirgula()
     {
         //valor tem 10 digitos, sem virgula
-        return $this->formataNumero($this->valorBoleto,10,0,"valor");
+        return Numero::formataNumero($this->valorBoleto,10,0,"valor");
     }
 
 
@@ -280,7 +281,9 @@ class Boleto
      * @return DIgitoVerificadorBarra
      */
     public function getDigitoVerificadorBarra() {
-        $numero = $this->banco->geraCodigoBanco().$this->getNumeroMoeda().$this->getFatorVencimento().$this->getValorBoletoSemVirgula().$this->cedente->getAgencia().$this->getNossoNumeroComDigitoVerificador().$this->formataNumero($this->cedente->getConta(),7,0).'0';
+        $nnum = Numero::formataNumero($this->banco->getCarteira(),2,0).Numero::formataNumero($this->getNossoNumero(),11,0);
+
+        $numero = $this->banco->getCodigo().$this->getNumeroMoeda().$this->getFatorVencimento().$this->getValorBoletoSemVirgula().$this->cedente->getAgencia().$nnum.Numero::formataNumero($this->cedente->getConta(),7,0).'0';
 
         $resto2 = Modulo::modulo11($numero, 9, 1);
         if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
@@ -292,39 +295,14 @@ class Boleto
         return $dv;
     }
 
-    /**
-     * @return Número formatado
-     */
-    public function formataNumero($numero,$loop,$insert,$tipo = "geral") {
-        if ($tipo == "geral") {
-            $numero = str_replace(",","",$numero);
-            while(strlen($numero)<$loop){
-                $numero = $insert . $numero;
-            }
-        }
-        if ($tipo == "valor") {
-            /*
-            retira as virgulas
-            formata o numero
-            preenche com zeros
-            */
-            $numero = str_replace(",","",$numero);
-            while(strlen($numero)<$loop){
-                $numero = $insert . $numero;
-            }
-        }
-        if ($tipo == "convenio") {
-            while(strlen($numero)<$loop){
-                $numero = $numero . $insert;
-            }
-        }
-        return $numero;
-    }
+
 
     public function digitoVerificadorNossonumero($numero) {
-        $resto2 = Modulo::modulo11($numero, 9, 1);
+        $resto2 = Modulo::modulo11($numero, 7, 1);
         $digito = 11 - $resto2;
-        if ($digito == 10 || $digito == 11) {
+        if ($digito == 10) {
+            $dv = "P";
+        } elseif($digito == 11) {
             $dv = 0;
         } else {
             $dv = $digito;
@@ -337,7 +315,7 @@ class Boleto
      */
     public function getNossoNumeroComDigitoVerificador()
     {
-        $nnum = $this->formataNumero($this->banco->getCarteira(),2,0).$this->formataNumero($this->getNossoNumero(),11,0);
+        $nnum = Numero::formataNumero($this->banco->getCarteira(),2,0).Numero::formataNumero($this->getNossoNumero(),11,0);
 
         //dv do nosso número
         return $this->digitoVerificadorNossonumero($nnum);
@@ -346,21 +324,34 @@ class Boleto
     /**
      * @return mixed
      */
+    public function getNossoNumeroSemDigitoVerificador()
+    {
+        return Numero::formataNumero($this->banco->getCarteira(),2,0).Numero::formataNumero($this->getNossoNumero(),11,0);
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCarteiraENossoNumeroComDigitoVerificador()
     {
-        $num = $this->formataNumero($this->banco->getCarteira(),2,0).$this->formataNumero($this->getNossoNumero(),11,0);
+        $num = Numero::formataNumero($this->banco->getCarteira(),2,0).Numero::formataNumero($this->getNossoNumero(),11,0);
 
         return substr($num,0,2).'/'.substr($num,2).'-'.$this->digitoVerificadorNossonumero($num);
     }
 
+    /**
+     * @return Linha
+     */
+    public function getLinha()
+    {
+        return $this->banco->getCodigo().$this->getNumeroMoeda().$this->getDigitoVerificadorBarra().$this->getFatorVencimento().$this->getValorBoletoSemVirgula().$this->cedente->getAgencia().$this->getNossoNumeroSemDigitoVerificador().Numero::formataNumero($this->cedente->getConta(),7,0)."0";;
+    }
 
 
 
     public function gerarLinhaDigitavel() {
 
-        $nnum = $this->formataNumero($this->banco->getCarteira(),2,0).$this->formataNumero($this->getNossoNumero(),11,0);
-echo $this->getDigitoVerificadorBarra();
-        $codigo = $this->banco->getCodigo().$this->getNumeroMoeda().$this->getDigitoVerificadorBarra().$this->getFatorVencimento().$this->getValorBoletoSemVirgula().$this->cedente->getAgencia().$nnum.$this->formataNumero($this->cedente->getConta(),7,0)."0";;
+        $codigo = $this->getLinha();
 
         // Posição 	Conteúdo
         // 1 a 3    Número do banco
