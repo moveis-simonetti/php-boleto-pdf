@@ -2,7 +2,7 @@
     "name": "simonetti/php-boleto-pdf",
     "description": "Gerador de Boletos em PDF",
     "type": "library",
-    "keywords": ["boleto", "pdf", "bradesco"],
+    "keywords": ["boleto", "pdf", "bradesco", "simonetti"],
     "homepage": "http://www.moveissimonetti.com.br",
     "license": "MIT",
     "authors": [
