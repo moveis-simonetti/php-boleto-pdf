@@ -38,21 +38,7 @@ $carne->addInstrucao("- Pedido cancelado após o vencimento");
 $carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveissimonetti.com.br");
 
 $parcela = new \Simonetti\Boleto\Carne\Parcela();
-$parcela->setValorBoleto(100);
-$parcela->setDataVencimento(new \DateTime('+2days'));
-$parcela->setNossoNumero('1001');
-$parcela->setNumeroDocumento('100');
-$carne->addParcela($parcela);
-
-$parcela = new \Simonetti\Boleto\Carne\Parcela();
-$parcela->setValorBoleto(100);
-$parcela->setDataVencimento(new \DateTime('+2days'));
-$parcela->setNossoNumero('1001');
-$parcela->setNumeroDocumento('100');
-$carne->addParcela($parcela);
-
-$parcela = new \Simonetti\Boleto\Carne\Parcela();
-$parcela->setValorBoleto(100);
+$parcela->setValorBoleto('100,00');
 $parcela->setDataVencimento(new \DateTime('+2days'));
 $parcela->setNossoNumero('1001');
 $parcela->setNumeroDocumento('100');

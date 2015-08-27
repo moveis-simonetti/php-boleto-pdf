@@ -7,6 +7,7 @@
 
         body {
             padding: 0;
+            max-width: 700px;
         }
 
         table {
@@ -66,12 +67,10 @@
         }
 
         #codigo-barras {
-            border-right: none;
-            border-left: none;
-            border-bottom: none;
             padding-left: 10px;
             padding-top: 5px;
             padding-bottom: 5px;
+            display: table;
         }
 
         #sacado {
@@ -328,18 +327,20 @@
                             <td colspan="9" class="texto-sacado-avalista-inferior">{{ boleto.sacado.enderecoLogradouro }}</td>
                             <td class="com-borda-esquerda com-borda-baixo">&nbsp;</td>
                         </tr>
+                        {% if '' != boleto.avalista.nome %}
                         <tr>
                             <td colspan="1" class="sacado-avalista-inferior avalista-inferior " >Avalista:</td>
-                            <td colspan="10" class="texto-sacado-avalista-inferior avalista-inferior">{{ boleto.sacado.nome }} - {{ boleto.sacado.cpfCnpj}}</td>
+                            <td colspan="8" class="texto-sacado-avalista-inferior avalista-inferior">{{ boleto.avalista.nome }} - {{ boleto.avalista.cpfCnpj}}</td>
                         </tr>
+                        {% endif %}
                         <tr>
-                            <td rowspan="2" colspan="10" id="codigo-barras" class="com-borda-topo" >
-                                <img src="data:image/png;base64,{{ codigoBarras }}" />
+                            <td rowspan="2" colspan="9" id="codigo-barras" class="com-borda-topo" >
+                                <img src="data:image/svg;base64,{{ codigoBarras }}" />
                             </td>
                             <td class="com-borda-topo" colspan="">Autenticação no verso</td>
                         </tr>
                         <tr>
-                            <td colspan="">Ficha de Compensação</td>
+                            <td colspan="1">Ficha de Compensação</td>
                         </tr>
                     </tbody>
                 </table>

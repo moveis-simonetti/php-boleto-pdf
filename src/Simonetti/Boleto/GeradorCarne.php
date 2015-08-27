@@ -1,7 +1,7 @@
 <?php
 namespace Simonetti\Boleto;
 
-use Picqer\Barcode\BarcodeGeneratorPNG;
+use Picqer\Barcode\BarcodeGeneratorSVG;
 
 /**
  * Class GeradorCarne
@@ -22,7 +22,7 @@ class GeradorCarne extends Gerador
     public function __construct(\Twig_Environment $twig)
     {
         $this->twig = $twig;
-        $this->geradorCodigoBarras = new BarcodeGeneratorPNG();
+        $this->geradorCodigoBarras = new BarcodeGeneratorSVG();
     }
 
     public function gerar(Carne $carne)
@@ -41,9 +41,9 @@ class GeradorCarne extends Gerador
 
             $codigoBarras = $this->geradorCodigoBarras->getBarcode(
                 $boleto->getLinha(),
-                BarcodeGeneratorPNG::TYPE_INTERLEAVED_2_5,
-                1.4,
-                48.3
+                BarcodeGeneratorSVG::TYPE_INTERLEAVED_2_5,
+                1,
+                40
             );
 
             $html = $this->twig->render(

@@ -14,7 +14,7 @@ class Caixa extends Banco
         $this->setNome("Caixa");
         $this->setAceite("SIM");
         $this->setLogomarca("logocaixa.jpg");
-        $this->setLocalPagamento("Pagável em qualquer Banco até o vencimento");
+        $this->setLocalPagamento("PagÃ¡vel em qualquer Banco atÃ© o vencimento");
         $this->setLayoutCarne('caixa/carne.html.twig');
     }
 
