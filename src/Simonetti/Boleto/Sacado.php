@@ -40,6 +40,11 @@ class Sacado
     private $cep;
 
     /**
+     * @var CpfCnpj
+     */
+    private $cpfCnpj;
+
+    /**
      * @param \Cep $cep
      */
     public function setCep($cep)
@@ -159,5 +164,20 @@ class Sacado
         return $this->uf;
     }
 
+    /**
+     * @return CpfCnpj
+     */
+    public function getCpfCnpj()
+    {
+        return $this->cpfCnpj;
+    }
+
+    /**
+     * @param CpfCnpj $cpfCnpj
+     */
+    public function setCpfCnpj($cpfCnpj)
+    {
+        $this->cpfCnpj = $cpfCnpj;
+    }
 
 }

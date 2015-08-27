@@ -5,7 +5,7 @@ namespace Simonetti\Boleto\Util;
 class Numero
 {
     /**
-     * @return Número formatado
+     * @return string Número formatado
      */
     public static function formataNumero($numero, $loop, $insert, $tipo = "geral")
     {
@@ -16,11 +16,6 @@ class Numero
             }
         }
         if ($tipo == "valor") {
-            /*
-            retira as virgulas
-            formata o numero
-            preenche com zeros
-            */
             $numero = str_replace(",", "", $numero);
             while (strlen($numero) < $loop) {
                 $numero = $insert . $numero;
