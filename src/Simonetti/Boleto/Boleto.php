@@ -21,7 +21,13 @@ class Boleto
      * @var Sacado
      */
     private $sacado;
+    /**
+     * @var string
+     */
     private $nossoNumero;
+    /**
+     * @var string
+     */
     private $numeroDocumento;
     /**
      * @var DateTime
@@ -39,7 +45,6 @@ class Boleto
      * @var float
      */
     private $valorBoleto;
-
     /**
      * @var int
      */
@@ -72,9 +77,9 @@ class Boleto
     private $instrucoes = array();
 
     /**
-     * @param \Banco $banco
+     * @param Banco $banco
      */
-    public function setBanco($banco)
+    public function setBanco(Banco $banco)
     {
         $this->banco = $banco;
     }
@@ -202,7 +207,7 @@ class Boleto
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getNossoNumero()
     {
@@ -226,7 +231,7 @@ class Boleto
     }
 
     /**
-     * @param \Sacado $sacado
+     * @param Sacado $sacado
      */
     public function setSacado($sacado)
     {
@@ -234,7 +239,7 @@ class Boleto
     }
 
     /**
-     * @return \Sacado
+     * @return Sacado
      */
     public function getSacado()
     {
@@ -278,7 +283,7 @@ class Boleto
 
 
     /**
-     * @return DIgitoVerificadorBarra
+     * @return string
      */
     public function getDigitoVerificadorBarra()
     {
@@ -362,17 +367,20 @@ class Boleto
     }
 
     /**
-     * @return Linha
+     * @return string
      */
     public function getLinha()
     {
-        return $this->banco->getCodigo() . $this->getNumeroMoeda() . $this->getDigitoVerificadorBarra(
-        ) . $this->getFatorVencimento() . $this->getValorBoletoSemVirgula() . $this->cedente->getAgencia(
-        ) . $this->getNossoNumeroSemDigitoVerificador() . Numero::formataNumero(
-            $this->cedente->getConta(),
-            7,
-            0
-        ) . "0";;
+        return
+            $this->banco->getCodigo() .
+            $this->getNumeroMoeda() .
+            $this->getDigitoVerificadorBarra() .
+            $this->getFatorVencimento() .
+            $this->getValorBoletoSemVirgula() .
+            $this->cedente->getAgencia() .
+            $this->getNossoNumeroSemDigitoVerificador() .
+            Numero::formataNumero($this->cedente->getConta(), 7, 0) .
+            "0";
     }
 
 

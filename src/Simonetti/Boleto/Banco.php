@@ -43,9 +43,19 @@ abstract class Banco
     private $carteira;
 
     /**
-     * @var Local Pagamento
+     * @var string Local Pagamento
      */
     private $localPagamento;
+
+    /**
+     * @var string
+     */
+    private $aceite;
+
+    /**
+     * @var string
+     */
+    private $layoutCarne;
 
     public function __construct()
     {
@@ -135,6 +145,22 @@ abstract class Banco
     }
 
     /**
+     * @return string
+     */
+    public function getAceite()
+    {
+        return $this->aceite;
+    }
+
+    /**
+     * @param string $aceite
+     */
+    public function setAceite($aceite)
+    {
+        $this->aceite = $aceite;
+    }
+
+    /**
      * @param string $nome
      */
     public function setNome($nome)
@@ -197,5 +223,20 @@ abstract class Banco
         return $parte1 . "-" . $parte2;
     }
 
+    /**
+     * @return string
+     */
+    public function getLayoutCarne()
+    {
+        return $this->layoutCarne;
+    }
+
+    /**
+     * @param string $layoutCarne
+     */
+    public function setLayoutCarne($layoutCarne)
+    {
+        $this->layoutCarne = $layoutCarne;
+    }
 
 }

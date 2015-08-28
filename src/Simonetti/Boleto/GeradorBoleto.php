@@ -8,12 +8,6 @@ use Simonetti\Boleto\Util\UnidadeMedida;
 
 class GeradorBoleto
 {
-
-    public static function getDirImages()
-    {
-        return __DIR__ . '/Resources/imgs/';
-    }
-
     public function gerar(Boleto $boleto)
     {
         $PDF = new FPDF("P", 'mm', 'A4');
@@ -67,7 +61,7 @@ class GeradorBoleto
         $PDF->SetFont('Arial', '', 9);
 
         $PDF->Cell(50, 10, '', 'B', 0, 'L');
-        $PDF->Image(self::getDirImages() . $boleto->getBanco()->getLogomarca(), 10, 43, 40, 10);
+        $PDF->Image(Gerador::getDirImages() . $boleto->getBanco()->getLogomarca(), 10, 43, 40, 10);
         //Select Arial italic 8
         $PDF->SetFont('Arial', 'B', 14);
         $PDF->Cell(20, 10, $boleto->getBanco()->getCodigoComDigitoVerificador(), 'LBR', 0, 'C');
@@ -178,7 +172,7 @@ class GeradorBoleto
 
 
         $PDF->Cell(50, 10, '', 'B', 0, 'L');
-        $PDF->Image(self::getDirImages() . $boleto->getBanco()->getLogomarca(), 10, 130, 40, 10);
+        $PDF->Image(Gerador::getDirImages() . $boleto->getBanco()->getLogomarca(), 10, 130, 40, 10);
         //Select Arial italic 8
         $PDF->SetFont('Arial', 'B', 14);
         $PDF->Cell(20, 10, $boleto->getBanco()->getCodigoComDigitoVerificador(), 'LBR', 0, 'C');
@@ -365,13 +359,13 @@ class GeradorBoleto
         }
 
         // Guarda inicial
-        $PDF->Image(self::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
         $PDF->SetX($PDF->GetX() + $fino);
-        $PDF->Image(self::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
         $PDF->SetX($PDF->GetX() + $fino);
-        $PDF->Image(self::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
         $PDF->SetX($PDF->GetX() + $fino);
-        $PDF->Image(self::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
         $PDF->SetX($PDF->GetX() + $fino);
 
         $texto = $valor;
@@ -391,7 +385,7 @@ class GeradorBoleto
                     $f1 = $largo;
                 }
 
-                $PDF->Image(self::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $f1, $altura);
+                $PDF->Image(Gerador::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $f1, $altura);
                 $PDF->SetX($PDF->GetX() + $f1);
 
                 if (substr($f, $i, 1) == "0") {
@@ -400,20 +394,20 @@ class GeradorBoleto
                     $f2 = $largo;
                 }
 
-                $PDF->Image(self::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $f2, $altura);
+                $PDF->Image(Gerador::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $f2, $altura);
                 $PDF->SetX($PDF->GetX() + $f2);
             }
         }
 
         // Draw guarda final
-        $PDF->Image(self::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $largo, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $largo, $altura);
         $PDF->SetX($PDF->GetX() + $largo);
-        $PDF->Image(self::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/b.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
         $PDF->SetX($PDF->GetX() + $fino);
-        $PDF->Image(self::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
+        $PDF->Image(Gerador::getDirImages() . '/p.png', $PDF->GetX(), $PDF->GetY(), $fino, $altura);
         $PDF->SetX($PDF->GetX() + $fino);
         $PDF->Image(
-            self::getDirImages() . '/b.png',
+            Gerador::getDirImages() . '/b.png',
             $PDF->GetX(),
             $PDF->GetY(),
             UnidadeMedida::px2milimetros(1),

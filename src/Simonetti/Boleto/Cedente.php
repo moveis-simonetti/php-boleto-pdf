@@ -60,7 +60,7 @@ class Cedente
     }
 
     /**
-     * @return \Agência
+     * @return string
      */
     public function getAgencia()
     {
@@ -92,7 +92,7 @@ class Cedente
     }
 
     /**
-     * @return \Conta
+     * @return string
      */
     public function getConta()
     {
