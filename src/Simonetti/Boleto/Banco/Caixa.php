@@ -30,7 +30,7 @@ class Caixa extends Banco
         $nossoNumero = $this->getCarteiraModalidade().'4/'.$boleto->getNossoNumero();
         $digito11 = Modulo::modulo11($boleto->getNossoNumero(), 9, 1);
 
-        echo $nossoNumero.'-'.$digito11;
+        return $nossoNumero.'-'.$digito11;
     }
 
 }
