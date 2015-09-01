@@ -37,7 +37,7 @@
 
         #tb-centro {
             float: left;
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         #tb-esquerda tr td {
@@ -114,8 +114,11 @@
             padding-right: 20px;
         }
 
-        .logo-banco {
+        .alinhado-centro {
             text-align: center;
+        }
+
+        .logo-banco {
             width: 100px;
         }
 
@@ -144,12 +147,12 @@
                 <table id="tb-esquerda">
                     <tbody>
                         <tr>
-                            <td>
+                            <td class="alinhado-centro">
                                 <img class="logo-banco" src="data:image/jpeg;base64,{{ logoBanco }}" />
                             </td>
                         </tr>
                         <tr>
-                            <td id="sacado">RECIBO DO SACADO</td>
+                            <td class="alinhado-centro" id="sacado">RECIBO DO SACADO</td>
                         </tr>
                         <tr>
                             <td class="titulo com-borda-esquerda com-borda-topo">N&ordm; Documento</td>
@@ -167,7 +170,7 @@
                             <td class="titulo com-borda-esquerda com-borda-topo">Ag./Cod.Cedente</td>
                         </tr>
                         <tr>
-                            <td class="valor com-borda-esquerda">{{ boleto.cedente.agencia }}/{{ boleto.cedente.dvAgencia }}</td>
+                            <td class="valor com-borda-esquerda">{{ boleto.cedente.agencia }}/{{ boleto.cedente.conta }}-{{ boleto.cedente.dvConta }}</td>
                         </tr>
                         <tr>
                             <td class="titulo com-borda-esquerda com-borda-topo">Nosso Número</td>
@@ -252,7 +255,7 @@
                         </tr>
                         <tr>
                             <td class="valor com-borda-baixo" colspan="10">{{ boleto.cedente.nome }}</td>
-                            <td class="valor com-borda-esquerda">{{ boleto.cedente.agencia }}/{{ boleto.cedente.dvAgencia }}</td>
+                            <td class="valor com-borda-esquerda" style="text-align: center">{{ boleto.cedente.agencia }}/{{ boleto.cedente.conta }}-{{ boleto.cedente.dvConta }}</td>
                         </tr>
                         <tr>
                             <td class="titulo data-emissao" colspan="3">Dt. Emiss&atilde;o</td>
@@ -284,7 +287,7 @@
                             <td class="valor especie-moeda com-borda-esquerda" colspan="2">R$</td>
                             <td class="valor quantidade-moeda com-borda-esquerda" colspan="2">&nbsp;</td>
                             <td class="valor valor-moeda com-borda-esquerda" colspan="1">&nbsp;</td>
-                            <td class="valor alinhado-direita com-borda-esquerda">{{ boleto.valorBoleto|number_format(2,',','0') }}</td>
+                            <td class="valor alinhado-direita com-borda-esquerda">{{ boleto.valorBoleto }}</td>
                         </tr>
                         <tr>
                             <td colspan="10" class="titulo com-borda-topo">Texto de responsabilidade do cedente</td>
@@ -326,19 +329,19 @@
                             <td class="com-borda-esquerda com-borda-baixo">&nbsp;</td>
                         </tr>
                         {% if '' != boleto.avalista.nome %}
-                        <tr>
-                            <td colspan="1" class="sacado-avalista-inferior avalista-inferior " >Avalista:</td>
-                            <td colspan="8" class="texto-sacado-avalista-inferior avalista-inferior">{{ boleto.avalista.nome }} - {{ boleto.avalista.cpfCnpj}}</td>
-                        </tr>
+                            <tr>
+                                <td colspan="1" class="sacado-avalista-inferior avalista-inferior " >Avalista:</td>
+                                <td colspan="8" class="texto-sacado-avalista-inferior avalista-inferior">{{ boleto.avalista.nome }} - {{ boleto.avalista.cpfCnpj}}</td>
+                            </tr>
                         {% endif %}
                         <tr>
                             <td rowspan="2" colspan="9" id="codigo-barras" class="com-borda-topo" >
                                 <img src="data:image/svg;base64,{{ codigoBarras }}" />
                             </td>
-                            <td class="com-borda-topo" colspan="">Autenticação no verso</td>
+                            <td class="com-borda-topo" colspan="2" style="padding-left: 20px; vertical-align: bottom;">Autenticação no verso</td>
                         </tr>
                         <tr>
-                            <td colspan="1">Ficha de Compensação</td>
+                            <td colspan="2" style="padding-left: 20px; vertical-align: top;">Ficha de Compensação</td>
                         </tr>
                     </tbody>
                 </table>
