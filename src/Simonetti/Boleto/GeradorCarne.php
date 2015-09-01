@@ -51,7 +51,7 @@ class GeradorCarne extends Gerador
                 [
                     'boleto' => $boleto,
                     'codigoBarras' => base64_encode($codigoBarras),
-                    'logoBanco' => base64_encode(file_get_contents(GeradorCarne::getDirImages() . 'logocaixa.jpg'))
+                    'logoBanco' => base64_encode(file_get_contents(GeradorCarne::getDirImages() . 'logocaixa.jpg')),
                 ]
             );
             $mpdf->WriteHTML($html);

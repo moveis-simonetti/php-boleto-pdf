@@ -4,6 +4,7 @@ namespace Simonetti\Boleto\Banco;
 
 
 use Simonetti\Boleto\Banco as BancoAbstract;
+use Simonetti\Boleto\Boleto;
 
 class Bradesco extends BancoAbstract
 {
@@ -16,6 +17,11 @@ class Bradesco extends BancoAbstract
         $this->setNome("Bradesco");
         $this->setLogomarca("logobradesco.jpg");
         $this->setLocalPagamento("Pagável em qualquer Banco até o vencimento");
+    }
+
+    function getNossoNumeroFormatado(Boleto $boleto)
+    {
+
     }
 
 }

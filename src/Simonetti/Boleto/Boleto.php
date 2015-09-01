@@ -438,5 +438,9 @@ class Boleto
         return "$campo1 $campo2 $campo3 $campo4 $campo5";
     }
 
+    public function getNossoNumeroFormatado()
+    {
+       return $this->getBanco()->getNossoNumeroFormatado($this);
+    }
 
 }

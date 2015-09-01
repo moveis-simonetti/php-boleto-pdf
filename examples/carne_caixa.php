@@ -23,8 +23,11 @@ $oSacado->setCidade("São Mateus");
 $oSacado->setUf("ES");
 $oSacado->setCep("29980-000");
 
+$banco = new \Simonetti\Boleto\Banco\Caixa();
+$banco->setCarteiraModalidade(1);
+
 $carne = new \Simonetti\Boleto\Carne(
-    new \Simonetti\Boleto\Banco\Caixa(),
+    $banco,
     $oCedente,
     $oSacado
 );
