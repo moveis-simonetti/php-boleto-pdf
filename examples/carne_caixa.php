@@ -32,10 +32,7 @@ $carne = new \Simonetti\Boleto\Carne(
 $carne->setNumeroMoeda("9");
 $carne->setDataDocumento(DateTime::createFromFormat('d/m/Y', "10/07/2014"));
 $carne->setDataProcessamento(DateTime::createFromFormat('d/m/Y', "10/07/2014"));
-$carne->addDemonstrativo('Pagamento de Compra na Móveis Simonetti');
-$carne->addInstrucao("- Sr. Caixa, não receber após o vencimento");
-$carne->addInstrucao("- Pedido cancelado após o vencimento");
-$carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveissimonetti.com.br");
+
 
 $parcela = new \Simonetti\Boleto\Carne\Parcela();
 $parcela->setValorBoleto('123,45');
