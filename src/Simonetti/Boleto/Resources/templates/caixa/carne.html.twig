@@ -37,7 +37,7 @@
 
         #tb-centro {
             float: left;
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         #tb-esquerda tr td {
@@ -114,8 +114,11 @@
             padding-right: 20px;
         }
 
-        .logo-banco {
+        .alinhado-centro {
             text-align: center;
+        }
+
+        .logo-banco {
             width: 100px;
         }
 
@@ -144,12 +147,12 @@
                 <table id="tb-esquerda">
                     <tbody>
                         <tr>
-                            <td>
+                            <td class="alinhado-centro">
                                 <img class="logo-banco" src="data:image/jpeg;base64,{{ logoBanco }}" />
                             </td>
                         </tr>
                         <tr>
-                            <td id="sacado">RECIBO DO SACADO</td>
+                            <td class="alinhado-centro" id="sacado">RECIBO DO SACADO</td>
                         </tr>
                         <tr>
                             <td class="titulo com-borda-esquerda com-borda-topo">N&ordm; Documento</td>
