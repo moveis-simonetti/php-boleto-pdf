@@ -8,39 +8,44 @@ abstract class Banco
 {
 
     /**
-     * @var Código do Banco
+     * @var int Código do Banco
      */
     private $codigo;
 
     /**
-     * @var Dígito Verificador Banco
+     * @var int Dígito Verificador Banco
      */
     private $digitoVerificador;
 
     /**
-     * @var Especie
+     * @var string Especie
      */
     private $especie;
 
     /**
-     * @var Especie Documento
+     * @var string Especie Documento
      */
     private $especieDocumento;
 
     /**
-     * @var Nome
+     * @var string Nome
      */
     private $nome;
 
     /**
-     * @var Logomarca
+     * @var string Logomarca
      */
     private $logomarca;
 
     /**
-     * @var Carteira
+     * @var string Carteira
      */
     private $carteira;
+
+    /**
+     * @var int Modalidade da carteira 1-Registrada/2-Sem Registro
+     */
+    private $carteiraModalidade;
 
     /**
      * @var string Local Pagamento
@@ -48,7 +53,7 @@ abstract class Banco
     private $localPagamento;
 
     /**
-     * @var string
+     * @var string SIM ou NÃO
      */
     private $aceite;
 
@@ -65,19 +70,43 @@ abstract class Banco
     protected abstract function init();
 
     /**
-     * @param string $carteira
+     * @return int Código
      */
-    public function setCarteira($carteira)
+    public function getCodigo()
     {
-        $this->carteira = $carteira;
+        return $this->codigo;
+    }
+
+    /**
+     * @param int $codigo
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDigitoVerificador()
+    {
+        return $this->digitoVerificador;
+    }
+
+    /**
+     * @param int $digitoVerificador
+     */
+    public function setDigitoVerificador($digitoVerificador)
+    {
+        $this->digitoVerificador = $digitoVerificador;
     }
 
     /**
      * @return string
      */
-    public function getCarteira()
+    public function getEspecie()
     {
-        return $this->carteira;
+        return $this->especie;
     }
 
     /**
@@ -91,9 +120,9 @@ abstract class Banco
     /**
      * @return string
      */
-    public function getEspecie()
+    public function getEspecieDocumento()
     {
-        return $this->especie;
+        return $this->especieDocumento;
     }
 
     /**
@@ -107,25 +136,25 @@ abstract class Banco
     /**
      * @return string
      */
-    public function getEspecieDocumento()
+    public function getNome()
     {
-        return $this->especieDocumento;
+        return $this->nome;
     }
 
     /**
-     * @param string $localPagamento
+     * @param string $nome
      */
-    public function setLocalPagamento($localPagamento)
+    public function setNome($nome)
     {
-        $this->localPagamento = $localPagamento;
+        $this->nome = $nome;
     }
 
     /**
      * @return string
      */
-    public function getLocalPagamento()
+    public function getLogomarca()
     {
-        return $this->localPagamento;
+        return $this->logomarca;
     }
 
     /**
@@ -139,9 +168,49 @@ abstract class Banco
     /**
      * @return string
      */
-    public function getLogomarca()
+    public function getCarteira()
     {
-        return $this->logomarca;
+        return $this->carteira;
+    }
+
+    /**
+     * @param string $carteira
+     */
+    public function setCarteira($carteira)
+    {
+        $this->carteira = $carteira;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCarteiraModalidade()
+    {
+        return $this->carteiraModalidade;
+    }
+
+    /**
+     * @param int $carteiraModalidade
+     */
+    public function setCarteiraModalidade($carteiraModalidade)
+    {
+        $this->carteiraModalidade = $carteiraModalidade;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalPagamento()
+    {
+        return $this->localPagamento;
+    }
+
+    /**
+     * @param string $localPagamento
+     */
+    public function setLocalPagamento($localPagamento)
+    {
+        $this->localPagamento = $localPagamento;
     }
 
     /**
@@ -158,54 +227,6 @@ abstract class Banco
     public function setAceite($aceite)
     {
         $this->aceite = $aceite;
-    }
-
-    /**
-     * @param string $nome
-     */
-    public function setNome($nome)
-    {
-        $this->nome = $nome;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNome()
-    {
-        return $this->nome;
-    }
-
-    /**
-     * @param string $codigo
-     */
-    public function setCodigo($codigo)
-    {
-        $this->codigo = $codigo;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
-
-    /**
-     * @param string $digitoVerificador
-     */
-    public function setDigitoVerificador($digitoVerificador)
-    {
-        $this->digitoVerificador = $digitoVerificador;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDigitoVerificador()
-    {
-        return $this->digitoVerificador;
     }
 
     /**
@@ -239,4 +260,5 @@ abstract class Banco
         $this->layoutCarne = $layoutCarne;
     }
 
+    abstract function getNossoNumeroFormatado(Boleto $boleto);
 }

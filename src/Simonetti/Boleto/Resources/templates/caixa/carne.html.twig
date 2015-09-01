@@ -183,7 +183,7 @@
                             <td class="titulo com-borda-esquerda com-borda-topo">Nosso Número</td>
                         </tr>
                         <tr>
-                            <td class="valor com-borda-esquerda">{{ boleto.nossoNumero }}</td>
+                            <td class="valor com-borda-esquerda">{{ boleto.nossoNumeroFormatado }}</td>
                         </tr>
                         <tr>
                             <td class="titulo com-borda-esquerda com-borda-topo">Vl Documento</td>
@@ -278,7 +278,7 @@
                             <td class="valor especie-documento com-borda-esquerda" colspan="2">{{ boleto.banco.especieDocumento }}</td>
                             <td class="valor aceite com-borda-esquerda" colspan="1">{{ boleto.banco.aceite }}</td>
                             <td class="valor data-processamento com-borda-esquerda" colspan="1">{{ boleto.dataEmissao | date('d/m/Y') }}</td>
-                            <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.nossoNumero }}</td>
+                            <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.nossoNumeroFormatado }}</td>
                         </tr>
                         <tr>
                             <td class="titulo uso-do-banco com-borda-topo" colspan="3">Uso do Banco</td>
