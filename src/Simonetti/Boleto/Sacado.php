@@ -10,98 +10,47 @@ class Sacado
     private $nome;
 
     /**
-     * @var Tipo Logradouro
+     * @var string Tipo Logradouro
      */
     private $tipoLogradouro;
 
     /**
-     * @var Endereço
+     * @var string Endereço
      */
     private $enderecoLogradouro;
 
     /**
-     * @var Número
+     * @var string Número
      */
     private $numeroLogradouro;
 
     /**
-     * @var Cidade
+     * @var string Cidade
      */
     private $cidade;
 
     /**
-     * @var UF
+     * @var string UF
      */
     private $uf;
 
     /**
-     * @var Cep
+     * @var string Cep
      */
     private $cep;
 
     /**
-     * @var CpfCnpj
+     * @var string CpfCnpj
      */
     private $cpfCnpj;
 
     /**
-     * @param \Cep $cep
+     * @var string Bairro
      */
-    public function setCep($cep)
-    {
-        $this->cep = $cep;
-    }
+    private $bairro;
 
     /**
-     * @return \Cep
-     */
-    public function getCep()
-    {
-        return $this->cep;
-    }
-
-    /**
-     * @param \Cidade $cidade
-     */
-    public function setCidade($cidade)
-    {
-        $this->cidade = $cidade;
-    }
-
-    /**
-     * @return \Cidade
-     */
-    public function getCidade()
-    {
-        return $this->cidade;
-    }
-
-    /**
-     * @param \Endereço $enderecoLogradouro
-     */
-    public function setEnderecoLogradouro($enderecoLogradouro)
-    {
-        $this->enderecoLogradouro = $enderecoLogradouro;
-    }
-
-    /**
-     * @return \Endereço
-     */
-    public function getEnderecoLogradouro()
-    {
-        return $this->enderecoLogradouro;
-    }
-
-    /**
-     * @param \Nome $nome
-     */
-    public function setNome($nome)
-    {
-        $this->nome = $nome;
-    }
-
-    /**
-     * @return \Nome
+     * @return Nome
      */
     public function getNome()
     {
@@ -109,31 +58,15 @@ class Sacado
     }
 
     /**
-     * @param \Número $numeroLogradouro
+     * @param Nome $nome
      */
-    public function setNumeroLogradouro($numeroLogradouro)
+    public function setNome($nome)
     {
-        $this->numeroLogradouro = $numeroLogradouro;
+        $this->nome = $nome;
     }
 
     /**
-     * @return \Número
-     */
-    public function getNumeroLogradouro()
-    {
-        return $this->numeroLogradouro;
-    }
-
-    /**
-     * @param \Tipo $tipoLogradouro
-     */
-    public function setTipoLogradouro($tipoLogradouro)
-    {
-        $this->tipoLogradouro = $tipoLogradouro;
-    }
-
-    /**
-     * @return \Tipo
+     * @return string
      */
     public function getTipoLogradouro()
     {
@@ -141,15 +74,63 @@ class Sacado
     }
 
     /**
-     * @param \UF $uf
+     * @param string $tipoLogradouro
      */
-    public function setUf($uf)
+    public function setTipoLogradouro($tipoLogradouro)
     {
-        $this->uf = $uf;
+        $this->tipoLogradouro = $tipoLogradouro;
     }
 
     /**
-     * @return \UF
+     * @return string
+     */
+    public function getEnderecoLogradouro()
+    {
+        return $this->enderecoLogradouro;
+    }
+
+    /**
+     * @param string $enderecoLogradouro
+     */
+    public function setEnderecoLogradouro($enderecoLogradouro)
+    {
+        $this->enderecoLogradouro = $enderecoLogradouro;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumeroLogradouro()
+    {
+        return $this->numeroLogradouro;
+    }
+
+    /**
+     * @param string $numeroLogradouro
+     */
+    public function setNumeroLogradouro($numeroLogradouro)
+    {
+        $this->numeroLogradouro = $numeroLogradouro;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCidade()
+    {
+        return $this->cidade;
+    }
+
+    /**
+     * @param string $cidade
+     */
+    public function setCidade($cidade)
+    {
+        $this->cidade = $cidade;
+    }
+
+    /**
+     * @return string
      */
     public function getUf()
     {
@@ -157,15 +138,31 @@ class Sacado
     }
 
     /**
-     * @return \UF
+     * @param string $uf
      */
-    public function getEndereco()
+    public function setUf($uf)
     {
-        return $this->uf;
+        $this->uf = $uf;
     }
 
     /**
-     * @return CpfCnpj
+     * @return string
+     */
+    public function getCep()
+    {
+        return $this->cep;
+    }
+
+    /**
+     * @param string $cep
+     */
+    public function setCep($cep)
+    {
+        $this->cep = $cep;
+    }
+
+    /**
+     * @return string
      */
     public function getCpfCnpj()
     {
@@ -173,11 +170,26 @@ class Sacado
     }
 
     /**
-     * @param CpfCnpj $cpfCnpj
+     * @param string $cpfCnpj
      */
     public function setCpfCnpj($cpfCnpj)
     {
         $this->cpfCnpj = $cpfCnpj;
     }
 
+    /**
+     * @return string
+     */
+    public function getBairro()
+    {
+        return $this->bairro;
+    }
+
+    /**
+     * @param string $bairro
+     */
+    public function setBairro($bairro)
+    {
+        $this->bairro = $bairro;
+    }
 }

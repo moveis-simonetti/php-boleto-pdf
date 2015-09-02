@@ -183,13 +183,13 @@
                             <td class="titulo com-borda-esquerda com-borda-topo">Nosso Número</td>
                         </tr>
                         <tr>
-                            <td class="valor com-borda-esquerda">{{ boleto.nossoNumeroFormatado }}</td>
+                            <td class="valor com-borda-esquerda">{{ boleto.getCarteiraENossoNumeroComDigitoVerificador }}</td>
                         </tr>
                         <tr>
                             <td class="titulo com-borda-esquerda com-borda-topo">Vl Documento</td>
                         </tr>
                         <tr>
-                            <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.valorBoleto | number_format(2, ',', '.') }}</td>
+                            <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.valorBoleto }}</td>
                         </tr>
                         <tr>
                             <td class="titulo com-borda-esquerda com-borda-topo">Desconto</td>
@@ -278,7 +278,7 @@
                             <td class="valor especie-documento com-borda-esquerda" colspan="2">{{ boleto.banco.especieDocumento }}</td>
                             <td class="valor aceite com-borda-esquerda" colspan="1">{{ boleto.banco.aceite }}</td>
                             <td class="valor data-processamento com-borda-esquerda" colspan="1">{{ boleto.dataEmissao | date('d/m/Y') }}</td>
-                            <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.nossoNumeroFormatado }}</td>
+                            <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.getCarteiraENossoNumeroComDigitoVerificador }}</td>
                         </tr>
                         <tr>
                             <td class="titulo uso-do-banco com-borda-topo" colspan="3">Uso do Banco</td>
@@ -332,7 +332,7 @@
                             <td class="titulo com-borda-esquerda com-borda-topo">Vl. Cobrado</td>
                         </tr>
                         <tr>
-                            <td colspan="9" class="texto-sacado-avalista-inferior">{{ boleto.sacado.enderecoLogradouro }}</td>
+                            <td colspan="9" class="texto-sacado-avalista-inferior">{{ boleto.sacado.tipoLogradouro }} {{ boleto.sacado.enderecoLogradouro }}, {{ boleto.sacado.numeroLogradouro }} - {{ boleto.sacado.bairro }} - {{ boleto.sacado.cidade}}/{{ boleto.sacado.uf}} - {{ boleto.sacado.cep }}</td>
                             <td class="com-borda-esquerda com-borda-baixo">&nbsp;</td>
                         </tr>
                         {% if '' != boleto.avalista.nome %}

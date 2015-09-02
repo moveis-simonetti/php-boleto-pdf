@@ -20,6 +20,7 @@ $oSacado->setTipoLogradouro("Rua");
 $oSacado->setEnderecoLogradouro("Bartolomeu da Gama");
 $oSacado->setNumeroLogradouro("100");
 $oSacado->setCidade("São Mateus");
+$oSacado->setBairro("Centro");
 $oSacado->setUf("ES");
 $oSacado->setCep("29980-000");
 
@@ -41,7 +42,7 @@ $carne->addInstrucao("- Pedido cancelado após o vencimento");
 $carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveissimonetti.com.br");
 
 $parcela = new \Simonetti\Boleto\Carne\Parcela();
-$parcela->setValorBoleto('123,45');
+$parcela->setValorBoleto('100,90');
 $parcela->setDataVencimento(new \DateTime('+2days'));
 $parcela->setNossoNumero('1001');
 $parcela->setNumeroDocumento('100');
