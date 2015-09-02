@@ -260,5 +260,21 @@ abstract class Banco
         $this->layoutCarne = $layoutCarne;
     }
 
-    abstract function getNossoNumeroFormatado(Boleto $boleto);
+    /**
+     * @param Boleto $boleto
+     * @return int|string
+     */
+    abstract function getNossoNumeroComDigitoVerificador(Boleto $boleto);
+
+    /**
+     * @param Boleto $boleto
+     * @return string
+     */
+    abstract function getNossoNumeroSemDigitoVerificador(Boleto $boleto);
+
+    /**
+     * @param Boleto $boleto
+     * @return string
+     */
+    abstract function getCarteiraENossoNumeroComDigitoVerificador(Boleto $boleto);
 }

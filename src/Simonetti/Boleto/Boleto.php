@@ -293,12 +293,14 @@ class Boleto
                 0
             );
 
-        $numero = $this->banco->getCodigo() . $this->getNumeroMoeda() . $this->getFatorVencimento(
-            ) . $this->getValorBoletoSemVirgula() . $this->cedente->getAgencia() . $nnum . Numero::formataNumero(
-                $this->cedente->getConta(),
-                7,
-                0
-            ) . '0';
+        $numero = $this->banco->getCodigo() .
+            $this->getNumeroMoeda() .
+            $this->getFatorVencimento() .
+            $this->getValorBoletoSemVirgula() .
+            $this->cedente->getAgencia() .
+            $nnum .
+            Numero::formataNumero($this->cedente->getConta(),7,0) .
+            '0';
 
         $resto2 = Modulo::modulo11($numero, 9, 1);
         if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
@@ -323,47 +325,6 @@ class Boleto
             $dv = $digito;
         }
         return $dv;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNossoNumeroComDigitoVerificador()
-    {
-        $nnum = Numero::formataNumero($this->banco->getCarteira(), 2, 0) . Numero::formataNumero(
-                $this->getNossoNumero(),
-                11,
-                0
-            );
-
-        //dv do nosso número
-        return $this->digitoVerificadorNossonumero($nnum);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNossoNumeroSemDigitoVerificador()
-    {
-        return Numero::formataNumero($this->banco->getCarteira(), 2, 0) . Numero::formataNumero(
-            $this->getNossoNumero(),
-            11,
-            0
-        );
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCarteiraENossoNumeroComDigitoVerificador()
-    {
-        $num = Numero::formataNumero($this->banco->getCarteira(), 2, 0) . Numero::formataNumero(
-                $this->getNossoNumero(),
-                11,
-                0
-            );
-
-        return substr($num, 0, 2) . '/' . substr($num, 2) . '-' . $this->digitoVerificadorNossonumero($num);
     }
 
     /**
@@ -440,7 +401,36 @@ class Boleto
 
     public function getNossoNumeroFormatado()
     {
-       return $this->getBanco()->getNossoNumeroFormatado($this);
+        return $this->getBanco()->getNossoNumeroFormatado($this);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNossoNumeroSemDigitoVerificador()
+    {
+        return $this->getBanco()->getNossoNumeroSemDigitoVerificador($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNossoNumeroComDigitoVerificador()
+    {
+        return $this->getBanco()->getNossoNumeroComDigitoVerificador($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCarteiraENossoNumeroComDigitoVerificador()
+    {
+       return $this->getBanco()->getCarteiraENossoNumeroComDigitoVerificador($this);
+    }
+
+    /*public function getDigitoVerificadorBarra()
+    {
+        return $this->getBanco()->getDigitoVerificadorBarra($this);
+    }*/
 
 }

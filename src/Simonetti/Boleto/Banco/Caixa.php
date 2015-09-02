@@ -4,6 +4,7 @@ namespace Simonetti\Boleto\Banco;
 use Simonetti\Boleto\Boleto;
 use Simonetti\Boleto\Banco;
 use Simonetti\Boleto\Util\Modulo;
+use Simonetti\Boleto\Util\Numero;
 
 class Caixa extends Banco
 {
@@ -21,16 +22,25 @@ class Caixa extends Banco
         $this->setLayoutCarne('caixa/carne.html.twig');
     }
 
-    /**
-     * @param Boleto $boleto
-     * @return string
-     */
-    public function getNossoNumeroFormatado(Boleto $boleto)
+    function getNossoNumeroComDigitoVerificador(Boleto $boleto)
     {
-        $nossoNumero = $this->getCarteiraModalidade().'4/'.$boleto->getNossoNumero();
+        $nnum = $this->getNossoNumeroSemDigitoVerificador($boleto);
+
+        return $boleto->digitoVerificadorNossonumero($nnum);
+    }
+
+    function getNossoNumeroSemDigitoVerificador(Boleto $boleto)
+    {
+        return $this->getCarteiraModalidade() . '4' . $boleto->getNossoNumero();
+    }
+
+    function getCarteiraENossoNumeroComDigitoVerificador(Boleto $boleto)
+    {
+        $nossoNumero = $this->getCarteiraModalidade() . '4/' . $boleto->getNossoNumero();
         $digito11 = Modulo::modulo11($boleto->getNossoNumero(), 9, 1);
 
-        return $nossoNumero.'-'.$digito11;
+        return $nossoNumero . '-' . $digito11;
     }
+
 
 }
