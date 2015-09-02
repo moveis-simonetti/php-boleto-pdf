@@ -68,7 +68,7 @@ class Bradesco extends BancoAbstract
     /**
      * @return string
      */
-    public function getDigitoVerificadorBarra(Boleto $boleto)
+    public function getDigitoVerificadorCodigoBarras(Boleto $boleto)
     {
         $nnum = Numero::formataNumero($this->getCarteira(), 2, 0) . Numero::formataNumero(
                 $boleto->getNossoNumero(),
@@ -91,6 +91,37 @@ class Bradesco extends BancoAbstract
         }
 
         return $dv;
+    }
+
+    public function digitoVerificadorNossonumero($numero)
+    {
+        $resto2 = Modulo::modulo11($numero, 7, 1);
+        $digito = 11 - $resto2;
+        if ($digito == 10) {
+            $dv = "P";
+        } elseif ($digito == 11) {
+            $dv = 0;
+        } else {
+            $dv = $digito;
+        }
+        return $dv;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinha(Boleto $boleto)
+    {
+        return
+            $this->getCodigo() .
+            $boleto->getNumeroMoeda() .
+            $boleto->getDigitoVerificadorBarra() .
+            $boleto->getFatorVencimento() .
+            $boleto->getValorBoletoSemVirgula() .
+            $boleto->getCedente()->getAgencia() .
+            $boleto->getNossoNumeroSemDigitoVerificador() .
+            Numero::formataNumero($boleto->getCedente()->getConta(), 7, 0) .
+            "0";
     }
 
 }

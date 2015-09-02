@@ -57,7 +57,7 @@ class Parcela
      */
     public function setNossoNumero($nossoNumero)
     {
-        $this->nossoNumero = str_pad($nossoNumero, 11, 0, STR_PAD_LEFT );
+        $this->nossoNumero = str_pad($nossoNumero, 15, 0, STR_PAD_LEFT );
     }
 
     /**

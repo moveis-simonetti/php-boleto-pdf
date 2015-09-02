@@ -277,4 +277,22 @@ abstract class Banco
      * @return string
      */
     abstract function getCarteiraENossoNumeroComDigitoVerificador(Boleto $boleto);
+
+    /**
+     * @param Boleto $boleto
+     * @return mixed
+     */
+    abstract function getDigitoVerificadorCodigoBarras(Boleto $boleto);
+
+    /**
+     * @param $numero
+     * @return mixed
+     */
+    abstract function digitoVerificadorNossonumero($numero);
+
+    /**
+     * @param Boleto $boleto
+     * @return mixed
+     */
+    abstract function getLinha(Boleto $boleto);
 }
