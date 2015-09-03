@@ -44,7 +44,7 @@ $carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveis
 $parcela = new \Simonetti\Boleto\Carne\Parcela();
 $parcela->setValorBoleto('216,30');
 $parcela->setDataVencimento(new \DateTime('2015-09-29'));
-$parcela->setNossoNumero('2');
+$parcela->setNossoNumero('1');
 $parcela->setNumeroDocumento('50165755');
 $carne->addParcela($parcela);
 

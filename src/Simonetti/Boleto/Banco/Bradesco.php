@@ -116,7 +116,7 @@ class Bradesco extends BancoAbstract
         return
             $this->getCodigo() .
             $boleto->getNumeroMoeda() .
-            $boleto->getDigitoVerificadorBarra() .
+            $boleto->getDigitoVerificadorCodigoBarras() .
             $boleto->getFatorVencimento() .
             $boleto->getValorBoletoSemVirgula() .
             $boleto->getCedente()->getAgencia() .
