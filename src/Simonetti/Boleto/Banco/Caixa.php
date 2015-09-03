@@ -28,9 +28,7 @@ class Caixa extends Banco
      */
     public function getNossoNumeroComDigitoVerificador(Boleto $boleto)
     {
-        $nnum = $this->getNossoNumeroSemDigitoVerificador($boleto);
-
-        return $boleto->digitoVerificadorNossonumero($nnum);
+        return $boleto->digitoVerificadorNossonumero($this->getNossoNumeroSemDigitoVerificador($boleto));
     }
 
     /**
@@ -39,7 +37,7 @@ class Caixa extends Banco
      */
     public function getNossoNumeroSemDigitoVerificador(Boleto $boleto)
     {
-        return $this->getCarteiraModalidade() . '4' . $boleto->getNossoNumero();
+        return $this->getCarteiraModalidade() . $this->getTipoImpressao() . $boleto->getNossoNumero();
     }
 
     /**
@@ -48,16 +46,11 @@ class Caixa extends Banco
      */
     public function getCarteiraENossoNumeroComDigitoVerificador(Boleto $boleto)
     {
-        $nossoNumero = $this->getCarteiraModalidade() . '4/' . $boleto->getNossoNumero();
-        $resto2 = Modulo::modulo11($boleto->getModalidadeNossoNumeroCompletoSemBarra(), 9, 1);
+        $nossoNumero = $this->getCarteiraModalidade() . $this->getTipoImpressao() . '/' . $boleto->getNossoNumero();
 
-        if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
-            $dv = 1;
-        } else {
-            $dv = 11 - $resto2;
-        }
-
-        return $nossoNumero . '-' . $dv;
+        return $nossoNumero . '-' . $this->tratarRestoDigitoVerificador(
+            Modulo::modulo11($boleto->getNossoNumeroSemDigitoVerificador(), 9, 1)
+        );
     }
 
     /**
@@ -66,23 +59,15 @@ class Caixa extends Banco
      */
     public function getDigitoVerificadorCodigoBarras(Boleto $boleto)
     {
-        $num =
+        $numero =
             $this->getCodigo() .
             $boleto->getNumeroMoeda() .
             $boleto->getFatorVencimento() .
             $boleto->getValorBoletoSemVirgula() .
-            $this->getCampoLivre($boleto).
+            $this->getCampoLivre($boleto) .
             $this->getDvCampoLivre($boleto);
 
-        $resto2 = Modulo::modulo11($num, 9, 1);
-
-        if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
-            $dv = 1;
-        } else {
-            $dv = 11 - $resto2;
-        }
-
-        return $dv;
+        return $this->tratarRestoDigitoVerificador(Modulo::modulo11($numero, 9, 1));
     }
 
     /**
@@ -91,15 +76,7 @@ class Caixa extends Banco
      */
     public function digitoVerificadorNossonumero($numero)
     {
-        $resto2 = Modulo::modulo11($numero, 9, 1);
-
-        if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
-            $dv = 1;
-        } else {
-            $dv = 11 - $resto2;
-        }
-
-        return $dv;
+        return $this->tratarRestoDigitoVerificador(Modulo::modulo11($numero, 9, 1));
     }
 
     function getLinha(Boleto $boleto)
@@ -110,21 +87,20 @@ class Caixa extends Banco
             $this->getDigitoVerificadorCodigoBarras($boleto) .
             $boleto->getFatorVencimento() .
             $boleto->getValorBoletoSemVirgula() .
-            $this->getCampoLivre($boleto).
-            $this->getDvCampoLivre($boleto)
-            ;
+            $this->getCampoLivre($boleto) .
+            $this->getDvCampoLivre($boleto);
     }
 
 
     public function getCampoLivre(Boleto $boleto)
     {
         return $boleto->getCedente()->getConta() .
-        $boleto->getCedente()->getDvConta() .
-        substr($boleto->getModalidadeNossoNumeroCompletoSemBarra(), 2, 3) .
-        $this->getCarteiraModalidade() .
-        substr($boleto->getModalidadeNossoNumeroCompletoSemBarra(), 5, 3) .
-        '4' .
-        substr($boleto->getModalidadeNossoNumeroCompletoSemBarra(), 8, 9);
+            $boleto->getCedente()->getDvConta() .
+            substr($this->getNossoNumeroSemDigitoVerificador($boleto), 2, 3) .
+            $this->getCarteiraModalidade() .
+            substr($this->getNossoNumeroSemDigitoVerificador($boleto), 5, 3) .
+            $this->getTipoImpressao() .
+            substr($this->getNossoNumeroSemDigitoVerificador($boleto), 8, 9);
 
     }
 
@@ -132,16 +108,20 @@ class Caixa extends Banco
     {
         $campoLivre = $this->getCampoLivre($boleto);
 
-        $resto2 = Modulo::modulo11($campoLivre, 9, 1);
+        return $this->tratarRestoDigitoVerificador(Modulo::modulo11($campoLivre, 9, 1));
+    }
 
-        if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
-            $dv = 1;
-        } else {
-            $dv = 11 - $resto2;
+    /**
+     * @param $resto
+     * @return int
+     */
+    private function tratarRestoDigitoVerificador($resto)
+    {
+        if ($resto == 0 || $resto == 1 || $resto == 10) {
+            return 1;
         }
 
-        return $dv;
-
+        return 11 - $resto;
     }
 
 }

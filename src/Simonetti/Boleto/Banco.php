@@ -56,6 +56,10 @@ abstract class Banco
      * @var string SIM ou NÃO
      */
     private $aceite;
+    /**
+     * @var int
+     */
+    private $tipoImpressao = 4;
 
     /**
      * @var string
@@ -227,6 +231,22 @@ abstract class Banco
     public function setAceite($aceite)
     {
         $this->aceite = $aceite;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTipoImpressao()
+    {
+        return $this->tipoImpressao;
+    }
+
+    /**
+     * @param int $tipoImpressao
+     */
+    public function setTipoImpressao($tipoImpressao)
+    {
+        $this->tipoImpressao = $tipoImpressao;
     }
 
     /**

@@ -361,15 +361,6 @@ class Boleto
         return "$campo1 $campo2 $campo3 $campo4 $campo5";
     }
 
-    public function getModalidadeNossoNumeroCompletoSemBarra() {
-        return $this->getBanco()->getCarteiraModalidade().'4'.$this->getNossoNumero();
-    }
-
-    public function getNossoNumeroFormatado()
-    {
-        return $this->getBanco()->getNossoNumeroFormatado($this);
-    }
-
     /**
      * @return mixed
      */

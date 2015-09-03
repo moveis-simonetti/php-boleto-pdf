@@ -66,6 +66,7 @@ class Bradesco extends BancoAbstract
     }
 
     /**
+     * @param Boleto $boleto
      * @return string
      */
     public function getDigitoVerificadorCodigoBarras(Boleto $boleto)
