@@ -79,6 +79,10 @@ class Caixa extends Banco
         return $this->tratarRestoDigitoVerificador(Modulo::modulo11($numero, 9, 1));
     }
 
+    /**
+     * @param Boleto $boleto
+     * @return string
+     */
     function getLinha(Boleto $boleto)
     {
         return
@@ -91,7 +95,10 @@ class Caixa extends Banco
             $this->getDvCampoLivre($boleto);
     }
 
-
+    /**
+     * @param Boleto $boleto
+     * @return string
+     */
     public function getCampoLivre(Boleto $boleto)
     {
         return $boleto->getCedente()->getConta() .
@@ -104,6 +111,10 @@ class Caixa extends Banco
 
     }
 
+    /**
+     * @param Boleto $boleto
+     * @return int
+     */
     public function getDvCampoLivre(Boleto $boleto)
     {
         $campoLivre = $this->getCampoLivre($boleto);

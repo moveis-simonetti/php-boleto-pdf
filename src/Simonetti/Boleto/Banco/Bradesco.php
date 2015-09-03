@@ -94,6 +94,10 @@ class Bradesco extends BancoAbstract
         return $dv;
     }
 
+    /**
+     * @param $numero
+     * @return int|string
+     */
     public function digitoVerificadorNossonumero($numero)
     {
         $resto2 = Modulo::modulo11($numero, 7, 1);
@@ -109,6 +113,7 @@ class Bradesco extends BancoAbstract
     }
 
     /**
+     * @param Boleto $boleto
      * @return string
      */
     public function getLinha(Boleto $boleto)
