@@ -285,46 +285,18 @@ class Boleto
     /**
      * @return string
      */
-    public function getDigitoVerificadorBarra()
+    public function getDigitoVerificadorCodigoBarras()
     {
-        $nnum = Numero::formataNumero($this->banco->getCarteira(), 2, 0) . Numero::formataNumero(
-                $this->getNossoNumero(),
-                11,
-                0
-            );
-
-        $numero = $this->banco->getCodigo() .
-            $this->getNumeroMoeda() .
-            $this->getFatorVencimento() .
-            $this->getValorBoletoSemVirgula() .
-            $this->cedente->getAgencia() .
-            $nnum .
-            Numero::formataNumero($this->cedente->getConta(),7,0) .
-            '0';
-
-        $resto2 = Modulo::modulo11($numero, 9, 1);
-        if ($resto2 == 0 || $resto2 == 1 || $resto2 == 10) {
-            $dv = 1;
-        } else {
-            $dv = 11 - $resto2;
-        }
-
-        return $dv;
+        return $this->getBanco()->getDigitoVerificadorCodigoBarras($this);
     }
 
-
+    /**
+     * @param $numero
+     * @return mixed
+     */
     public function digitoVerificadorNossonumero($numero)
     {
-        $resto2 = Modulo::modulo11($numero, 7, 1);
-        $digito = 11 - $resto2;
-        if ($digito == 10) {
-            $dv = "P";
-        } elseif ($digito == 11) {
-            $dv = 0;
-        } else {
-            $dv = $digito;
-        }
-        return $dv;
+        return $this->getBanco()->digitoVerificadorNossonumero($numero);
     }
 
     /**
@@ -332,16 +304,7 @@ class Boleto
      */
     public function getLinha()
     {
-        return
-            $this->banco->getCodigo() .
-            $this->getNumeroMoeda() .
-            $this->getDigitoVerificadorBarra() .
-            $this->getFatorVencimento() .
-            $this->getValorBoletoSemVirgula() .
-            $this->cedente->getAgencia() .
-            $this->getNossoNumeroSemDigitoVerificador() .
-            Numero::formataNumero($this->cedente->getConta(), 7, 0) .
-            "0";
+       return $this->getBanco()->getLinha($this);
     }
 
 
@@ -349,7 +312,6 @@ class Boleto
     {
 
         $codigo = $this->getLinha();
-
         // Posição 	Conteúdo
         // 1 a 3    Número do banco
         // 4        Código da Moeda - 9 para Real
@@ -399,11 +361,6 @@ class Boleto
         return "$campo1 $campo2 $campo3 $campo4 $campo5";
     }
 
-    public function getNossoNumeroFormatado()
-    {
-        return $this->getBanco()->getNossoNumeroFormatado($this);
-    }
-
     /**
      * @return mixed
      */
@@ -427,10 +384,5 @@ class Boleto
     {
        return $this->getBanco()->getCarteiraENossoNumeroComDigitoVerificador($this);
     }
-
-    /*public function getDigitoVerificadorBarra()
-    {
-        return $this->getBanco()->getDigitoVerificadorBarra($this);
-    }*/
 
 }

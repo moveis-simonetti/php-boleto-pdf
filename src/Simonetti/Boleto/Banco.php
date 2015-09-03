@@ -56,6 +56,10 @@ abstract class Banco
      * @var string SIM ou NÃO
      */
     private $aceite;
+    /**
+     * @var int
+     */
+    private $tipoImpressao = 4;
 
     /**
      * @var string
@@ -230,6 +234,22 @@ abstract class Banco
     }
 
     /**
+     * @return int
+     */
+    public function getTipoImpressao()
+    {
+        return $this->tipoImpressao;
+    }
+
+    /**
+     * @param int $tipoImpressao
+     */
+    public function setTipoImpressao($tipoImpressao)
+    {
+        $this->tipoImpressao = $tipoImpressao;
+    }
+
+    /**
      * @return string
      */
     public function getCodigoComDigitoVerificador()
@@ -277,4 +297,22 @@ abstract class Banco
      * @return string
      */
     abstract function getCarteiraENossoNumeroComDigitoVerificador(Boleto $boleto);
+
+    /**
+     * @param Boleto $boleto
+     * @return mixed
+     */
+    abstract function getDigitoVerificadorCodigoBarras(Boleto $boleto);
+
+    /**
+     * @param $numero
+     * @return mixed
+     */
+    abstract function digitoVerificadorNossonumero($numero);
+
+    /**
+     * @param Boleto $boleto
+     * @return mixed
+     */
+    abstract function getLinha(Boleto $boleto);
 }

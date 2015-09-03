@@ -57,7 +57,7 @@ class GeradorCarne extends Gerador
             $mpdf->WriteHTML($html);
             $mpdf->Ln(2);
         }
-        $mpdf->Output();
+        $mpdf->Output('boleto.pdf', 'D');
     }
 
 }

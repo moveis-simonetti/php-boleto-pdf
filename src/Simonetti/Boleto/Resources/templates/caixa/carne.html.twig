@@ -254,7 +254,7 @@
                         </tr>
                         <tr>
                             <td class="valor com-borda-baixo" colspan="10">{{ boleto.banco.localPagamento }}</td>
-                            <td class="valor com-borda-baixo alinhado-direita com-borda-esquerda">{{ boleto.vencimento | date('d/m/Y') }}</td>
+                            <td class="valor com-borda-baixo alinhado-direita com-borda-esquerda">{{ boleto.dataVencimento | date('d/m/Y') }}</td>
                         </tr>
                         <tr>
                             <td class="titulo" colspan="10">Cedente</td>
@@ -273,11 +273,11 @@
                             <td class="titulo com-borda-esquerda  com-borda-topo">Nosso N&uacute;mero</td>
                         </tr>
                         <tr>
-                            <td class="valor data-emissao" colspan="3"> {{ boleto.dataEmissao | date('d/m/Y') }}</td>
+                            <td class="valor data-emissao" colspan="3"> {{ boleto.dataDocumento | date('d/m/Y') }}</td>
                             <td class="valor numero-documento com-borda-esquerda" colspan="3">{{ boleto.numeroDocumento }}</td>
                             <td class="valor especie-documento com-borda-esquerda" colspan="2">{{ boleto.banco.especieDocumento }}</td>
                             <td class="valor aceite com-borda-esquerda" colspan="1">{{ boleto.banco.aceite }}</td>
-                            <td class="valor data-processamento com-borda-esquerda" colspan="1">{{ boleto.dataEmissao | date('d/m/Y') }}</td>
+                            <td class="valor data-processamento com-borda-esquerda" colspan="1">{{ boleto.dataProcessamento | date('d/m/Y') }}</td>
                             <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.getCarteiraENossoNumeroComDigitoVerificador }}</td>
                         </tr>
                         <tr>
