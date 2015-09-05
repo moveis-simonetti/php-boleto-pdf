@@ -119,15 +119,20 @@ class Caixa extends Banco
     {
         $campoLivre = $this->getCampoLivre($boleto);
 
-        return $this->tratarRestoDigitoVerificador(Modulo::modulo11($campoLivre, 9, 1));
+        return $this->tratarRestoDigitoVerificador(Modulo::modulo11($campoLivre, 9, 1), true);
     }
 
     /**
      * @param $resto
+     * @param bool|false $permiteZero
      * @return int
      */
-    private function tratarRestoDigitoVerificador($resto)
+    private function tratarRestoDigitoVerificador($resto, $permiteZero = false)
     {
+        if(true == $permiteZero && 0 == $resto) {
+            return 0;
+        }
+
         if ($resto == 0 || $resto == 1 || $resto == 10) {
             return 1;
         }
