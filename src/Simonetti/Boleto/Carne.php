@@ -245,6 +245,7 @@ class Carne
             $boleto->setBanco($this->getBanco());
             $boleto->setCedente($this->getCedente());
             $boleto->setSacado($this->getSacado());
+            $boleto->setAvalista($this->getAvalista());
             $boleto->setNumeroDocumento($parcela->getNumeroDocumento());
             $boleto->setNossoNumero($parcela->getNossoNumero());
             $boleto->setDataVencimento($parcela->getDataVencimento() );

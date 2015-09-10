@@ -24,6 +24,9 @@ $oSacado->setBairro("Centro");
 $oSacado->setUf("ES");
 $oSacado->setCep("29980-000");
 
+
+$oAvalista = new \Simonetti\Boleto\Avalista('FRANK BRUNO', '133.555.999-75');
+
 $banco = new \Simonetti\Boleto\Banco\Caixa();
 $banco->setCarteiraModalidade('1');
 $banco->setCarteira('RG');
@@ -31,7 +34,8 @@ $banco->setCarteira('RG');
 $carne = new \Simonetti\Boleto\Carne(
     $banco,
     $oCedente,
-    $oSacado
+    $oSacado,
+    $oAvalista
 );
 
 $carne->setNumeroMoeda("9");

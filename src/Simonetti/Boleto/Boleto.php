@@ -22,6 +22,10 @@ class Boleto
      */
     private $sacado;
     /**
+     * @var Avalista
+     */
+    private $avalista;
+    /**
      * @var string
      */
     private $nossoNumero;
@@ -244,6 +248,22 @@ class Boleto
     public function getSacado()
     {
         return $this->sacado;
+    }
+
+    /**
+     * @param Sacado $avalista
+     */
+    public function setAvalista($avalista)
+    {
+        $this->avalista = $avalista;
+    }
+
+    /**
+     * @return Avalista
+     */
+    public function getAvalista()
+    {
+        return $this->avalista;
     }
 
     /**
