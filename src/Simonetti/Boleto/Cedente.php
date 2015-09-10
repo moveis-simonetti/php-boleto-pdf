@@ -7,52 +7,52 @@ use Simonetti\Boleto\Util\Numero;
 class Cedente
 {
     /**
-     * @var Nome
+     * @var string Nome
      */
     private $nome;
 
     /**
-     * @var Cpf/Cnpj
+     * @var string Cpf/Cnpj
      */
     private $cpfCnpj;
 
     /**
-     * @var Endereço
+     * @var string Endereço
      */
     private $endereco;
 
     /**
-     * @var Cidade
+     * @var string Cidade
      */
     private $cidade;
 
     /**
-     * @var UF
+     * @var string UF
      */
     private $uf;
 
     /**
-     * @var Agência
+     * @var string Agência
      */
     private $agencia;
 
     /**
-     * @var Dígito Verificador Agência
+     * @var string Dígito Verificador Agência
      */
     private $dvAgencia;
 
     /**
-     * @var Conta
+     * @var string
      */
     private $conta;
 
     /**
-     * @var Dígito Verificador Conta
+     * @var string Dígito Verificador Conta
      */
     private $dvConta;
 
     /**
-     * @param \Agência $agencia
+     * @param string $agencia
      */
     public function setAgencia($agencia)
     {
@@ -68,7 +68,7 @@ class Cedente
     }
 
     /**
-     * @param \Cidade $cidade
+     * @param string $cidade
      */
     public function setCidade($cidade)
     {
@@ -76,7 +76,7 @@ class Cedente
     }
 
     /**
-     * @return \Cidade
+     * @return string
      */
     public function getCidade()
     {
@@ -84,7 +84,7 @@ class Cedente
     }
 
     /**
-     * @param \Conta $conta
+     * @param string $conta
      */
     public function setConta($conta)
     {
@@ -100,7 +100,7 @@ class Cedente
     }
 
     /**
-     * @param \Cpf $cpfCnpj
+     * @param string $cpfCnpj
      */
     public function setCpfCnpj($cpfCnpj)
     {
@@ -108,7 +108,7 @@ class Cedente
     }
 
     /**
-     * @return \Cpf
+     * @return string
      */
     public function getCpfCnpj()
     {
@@ -116,7 +116,7 @@ class Cedente
     }
 
     /**
-     * @param \Dígito $dvAgencia
+     * @param string $dvAgencia
      */
     public function setDvAgencia($dvAgencia)
     {
@@ -124,7 +124,7 @@ class Cedente
     }
 
     /**
-     * @return \Dígito
+     * @return string
      */
     public function getDvAgencia()
     {
@@ -132,7 +132,7 @@ class Cedente
     }
 
     /**
-     * @param \Dígito $dvConta
+     * @param string $dvConta
      */
     public function setDvConta($dvConta)
     {
@@ -140,7 +140,7 @@ class Cedente
     }
 
     /**
-     * @return \Dígito
+     * @return string
      */
     public function getDvConta()
     {
@@ -148,7 +148,7 @@ class Cedente
     }
 
     /**
-     * @param \Endereço $endereco
+     * @param string $endereco
      */
     public function setEndereco($endereco)
     {
@@ -156,7 +156,7 @@ class Cedente
     }
 
     /**
-     * @return \Endereço
+     * @return string
      */
     public function getEndereco()
     {
@@ -164,7 +164,7 @@ class Cedente
     }
 
     /**
-     * @param \Nome $nome
+     * @param string $nome
      */
     public function setNome($nome)
     {
@@ -172,7 +172,7 @@ class Cedente
     }
 
     /**
-     * @return \Nome
+     * @return string
      */
     public function getNome()
     {
@@ -180,7 +180,7 @@ class Cedente
     }
 
     /**
-     * @param \UF $uf
+     * @param string $uf
      */
     public function setUf($uf)
     {
@@ -188,7 +188,7 @@ class Cedente
     }
 
     /**
-     * @return \UF
+     * @return string
      */
     public function getUf()
     {
@@ -196,7 +196,7 @@ class Cedente
     }
 
     /**
-     * @return Agência com Dv
+     * @return string Agência com Dv
      */
     public function getAgenciaComDv()
     {
@@ -204,7 +204,7 @@ class Cedente
     }
 
     /**
-     * @return Conta com Dv
+     * @return string Conta com Dv
      */
     public function getContaComDv()
     {
@@ -212,6 +212,5 @@ class Cedente
         $dv = Numero::formataNumero($this->dvConta, 1, 0);
         return $conta . "-" . $dv;
     }
-
 
 }

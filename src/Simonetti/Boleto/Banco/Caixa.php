@@ -10,15 +10,14 @@ class Caixa extends Banco
 {
     protected function init()
     {
-        $this->setCarteira("01");
-        $this->setCarteiraModalidade("2");
+        $this->setCarteiraModalidade("1");
         $this->setEspecie("R$");
         $this->setEspecieDocumento("DM");
         $this->setCodigo("104");
         $this->setNome("Caixa");
-        $this->setAceite("SIM");
+        $this->setAceite("A");
         $this->setLogomarca("logocaixa.jpg");
-        $this->setLocalPagamento("Pagável em qualquer Banco até o vencimento");
+        $this->setLocalPagamento("PREFERENCIALMENTE NAS CASAS LOTÉRICAS ATÉ O VALOR LIMITE");
         $this->setLayoutCarne('caixa/carne.html.twig');
     }
 

@@ -144,6 +144,9 @@
         .com-borda-esquerda {
             border-left: 1px solid #000;
         }
+        .uppercase {
+            text-transform: uppercase;
+        }
 
     </style>
 </head>
@@ -174,7 +177,7 @@
                             <td class="valor com-borda-esquerda">{{ boleto.dataVencimento | date('d/m/Y') }}</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Ag./Cod.Cedente</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">Ag./Cod. Benefici&aacute;rio</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">{{ boleto.cedente.agencia }}/{{ boleto.cedente.conta }}-{{ boleto.cedente.dvConta }}</td>
@@ -186,37 +189,37 @@
                             <td class="valor com-borda-esquerda">{{ boleto.getCarteiraENossoNumeroComDigitoVerificador }}</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Vl Documento</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(=) Valor Documento</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.valorBoleto }}</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Desconto</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(-) Desconto</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Outras Deduc/Abat.</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(-) Outras Deduc/Abat.</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Mora/Multa</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(+) Mora/Multa</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Outros Acres.</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(+) Outros Acres.</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Vl Cobrado</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(=) Valor Cobrado</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
@@ -249,90 +252,92 @@
                 <table id="tb-centro">
                     <tbody>
                         <tr>
-                            <td class="titulo com-borda-topo" colspan="10">Local do Pagamento</td>
+                            <td class="titulo com-borda-topo" colspan="5">Local do Pagamento</td>
                             <td style="width: 140px;" class="titulo com-borda-topo com-borda-esquerda">Vencimento</td>
                         </tr>
                         <tr>
-                            <td class="valor com-borda-baixo" colspan="10">{{ boleto.banco.localPagamento }}</td>
+                            <td class="valor com-borda-baixo" colspan="5">{{ boleto.banco.localPagamento }}</td>
                             <td class="valor com-borda-baixo alinhado-direita com-borda-esquerda">{{ boleto.dataVencimento | date('d/m/Y') }}</td>
                         </tr>
                         <tr>
-                            <td class="titulo" colspan="10">Cedente</td>
-                            <td class="titulo com-borda-topo com-borda-esquerda">Ag/Cod. Cedente</td>
+                            <td class="titulo">Benefici&aacute;rio:</td>
+                            <td class="valor uppercase" colspan="3">{{ boleto.cedente.nome }}</td>
+                            <td class="valor" style="text-align: right; padding-right: 5px;">{{ boleto.cedente.cpfCnpj }}</td>
+                            <td class="titulo com-borda-topo com-borda-esquerda">Ag./Cod. Benefici&aacute;rio</td>
                         </tr>
                         <tr>
-                            <td class="valor com-borda-baixo" colspan="10">{{ boleto.cedente.nome }}</td>
+                            <td class="valor uppercase com-borda-baixo " colspan="5"> {{ boleto.cedente.endereco }}</td>
                             <td class="valor com-borda-esquerda" style="text-align: center">{{ boleto.cedente.agencia }}/{{ boleto.cedente.conta }}-{{ boleto.cedente.dvConta }}</td>
                         </tr>
                         <tr>
-                            <td class="titulo data-emissao" colspan="3">Dt. Emiss&atilde;o</td>
-                            <td class="titulo numero-documento com-borda-esquerda" colspan="3">N&ordm; Documento</td>
-                            <td class="titulo especie-documento com-borda-esquerda" colspan="2">Esp. Doc.</td>
+                            <td class="titulo data-emissao" colspan="1" style="width: 75px;">Data Emiss&atilde;o</td>
+                            <td class="titulo numero-documento com-borda-esquerda" colspan="1">N&ordm; Documento</td>
+                            <td class="titulo especie-documento com-borda-esquerda" colspan="1">Esp&eacute;cie Doc.</td>
                             <td class="titulo aceite com-borda-esquerda" colspan="1">Aceite</td>
-                            <td class="titulo data-processamento com-borda-esquerda" colspan="1">Dt. Proc.</td>
-                            <td class="titulo com-borda-esquerda  com-borda-topo">Nosso N&uacute;mero</td>
+                            <td class="titulo data-processamento com-borda-esquerda" colspan="1">Data Processamento</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">Nosso N&uacute;mero</td>
                         </tr>
                         <tr>
-                            <td class="valor data-emissao" colspan="3"> {{ boleto.dataDocumento | date('d/m/Y') }}</td>
-                            <td class="valor numero-documento com-borda-esquerda" colspan="3">{{ boleto.numeroDocumento }}</td>
-                            <td class="valor especie-documento com-borda-esquerda" colspan="2">{{ boleto.banco.especieDocumento }}</td>
+                            <td class="valor data-emissao" colspan="1"> {{ boleto.dataDocumento | date('d/m/Y') }}</td>
+                            <td class="valor numero-documento com-borda-esquerda" colspan="1">{{ boleto.numeroDocumento }}</td>
+                            <td class="valor especie-documento com-borda-esquerda" colspan="1">{{ boleto.banco.especieDocumento }}</td>
                             <td class="valor aceite com-borda-esquerda" colspan="1">{{ boleto.banco.aceite }}</td>
                             <td class="valor data-processamento com-borda-esquerda" colspan="1">{{ boleto.dataProcessamento | date('d/m/Y') }}</td>
                             <td class="valor com-borda-esquerda alinhado-direita">{{ boleto.getCarteiraENossoNumeroComDigitoVerificador }}</td>
                         </tr>
                         <tr>
-                            <td class="titulo uso-do-banco com-borda-topo" colspan="3">Uso do Banco</td>
-                            <td class="titulo carteira com-borda-esquerda com-borda-topo" colspan="2">Carteira</td>
-                            <td class="titulo especie-moeda com-borda-esquerda com-borda-topo" colspan="2">Esp. Moeda</td>
-                            <td class="titulo quantidade-moeda com-borda-esquerda com-borda-topo" colspan="2">Qtde Moeda</td>
-                            <td class="titulo valor-moeda com-borda-esquerda com-borda-topo" colspan="1">Valor Moeda</td>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Valor Doc.</td>
+                            <td class="titulo uso-do-banco com-borda-topo" colspan="1">Uso do Banco</td>
+                            <td class="titulo carteira com-borda-esquerda com-borda-topo" colspan="1">Carteira</td>
+                            <td class="titulo especie-moeda com-borda-esquerda com-borda-topo" colspan="1">Esp&eacute;cie Moeda</td>
+                            <td class="titulo quantidade-moeda com-borda-esquerda com-borda-topo" colspan="1">Qtde moeda</td>
+                            <td class="titulo valor-moeda com-borda-esquerda com-borda-topo" colspan="1">xValor</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(=) Valor Doc.</td>
                         </tr>
                         <tr>
-                            <td class="valor uso-do-banco" colspan="3">&nbsp;</td>
-                            <td class="valor carteira com-borda-esquerda" colspan="2">{{ boleto.banco.carteira }}</td>
-                            <td class="valor especie-moeda com-borda-esquerda" colspan="2">R$</td>
-                            <td class="valor quantidade-moeda com-borda-esquerda" colspan="2">&nbsp;</td>
+                            <td class="valor uso-do-banco" colspan="1">&nbsp;</td>
+                            <td class="valor carteira com-borda-esquerda" colspan="1">{{ boleto.banco.carteiraFormatada }}</td>
+                            <td class="valor especie-moeda com-borda-esquerda" colspan="1">R$</td>
+                            <td class="valor quantidade-moeda com-borda-esquerda" colspan="1">&nbsp;</td>
                             <td class="valor valor-moeda com-borda-esquerda" colspan="1">&nbsp;</td>
                             <td class="valor alinhado-direita com-borda-esquerda">{{ boleto.valorBoleto }}</td>
                         </tr>
                         <tr>
-                            <td colspan="10" class="titulo com-borda-topo">Texto de responsabilidade do cedente</td>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Desconto</td>
+                            <td colspan="5" class="titulo com-borda-topo">Texto de responsabilidade do Benefici&aacute;rio</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(-) Desconto</td>
                         </tr>
                         <tr>
-                            <td class="instrucoes" colspan="10" rowspan="7">
+                            <td class="instrucoes" colspan="5" rowspan="7">
                                 {% for instrucao in boleto.instrucoes %}
-                                    {{ instrucao }}
+                                    <p>{{ instrucao }}</p>
                                 {% endfor %}
                             </td>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Outras Deduc/Atabt.</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(-) Outras Deduc/Atabt.</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Mora/Multa</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(+) Mora/Multa/Juros</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Outros Acres.</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(+) Outros Acres.</td>
                         </tr>
                         <tr>
                             <td class="valor com-borda-esquerda">&nbsp;</td>
                         </tr>
                         <tr>
                             <td rowspan="2" colspan="1" class="sacado-avalista-inferior com-borda-topo" >Sacado:</td>
-                            <td colspan="9" class="texto-sacado-avalista-inferior com-borda-topo">{{ boleto.sacado.nome }} - {{ boleto.sacado.cpfCnpj}}</td>
-                            <td class="titulo com-borda-esquerda com-borda-topo">Vl. Cobrado</td>
+                            <td colspan="4" class="texto-sacado-avalista-inferior com-borda-topo">{{ boleto.sacado.nome }} - {{ boleto.sacado.cpfCnpj}}</td>
+                            <td class="titulo com-borda-esquerda com-borda-topo">(=) Valor. Cobrado</td>
                         </tr>
                         <tr>
-                            <td colspan="9" class="texto-sacado-avalista-inferior">{{ boleto.sacado.tipoLogradouro }} {{ boleto.sacado.enderecoLogradouro }}, {{ boleto.sacado.numeroLogradouro }} - {{ boleto.sacado.bairro }} - {{ boleto.sacado.cidade}}/{{ boleto.sacado.uf}} - {{ boleto.sacado.cep }}</td>
+                            <td colspan="4" class="texto-sacado-avalista-inferior">{{ boleto.sacado.tipoLogradouro }} {{ boleto.sacado.enderecoLogradouro }}, {{ boleto.sacado.numeroLogradouro }} - {{ boleto.sacado.bairro }} - {{ boleto.sacado.cidade}}/{{ boleto.sacado.uf}} - {{ boleto.sacado.cep }}</td>
                             <td class="com-borda-esquerda com-borda-baixo">&nbsp;</td>
                         </tr>
                         {% if '' != boleto.avalista.nome %}
@@ -342,10 +347,10 @@
                             </tr>
                         {% endif %}
                         <tr>
-                            <td rowspan="2" colspan="9" id="codigo-barras" class="com-borda-topo" >
+                            <td rowspan="2" colspan="4" id="codigo-barras" class="com-borda-topo" >
                                 <img src="data:image/svg;base64,{{ codigoBarras }}" />
                             </td>
-                            <td class="com-borda-topo" colspan="2" style="padding-left: 20px; vertical-align: bottom;">Autenticação no verso</td>
+                            <td class="com-borda-topo" colspan="2" style="padding-left: 20px; vertical-align: bottom;">Autenticação Mecanica</td>
                         </tr>
                         <tr>
                             <td colspan="2" style="padding-left: 20px; vertical-align: top;">Ficha de Compensação</td>
