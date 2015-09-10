@@ -53,7 +53,7 @@ abstract class Banco
     private $localPagamento;
 
     /**
-     * @var string SIM ou NÃO
+     * @var string A (Aceite) ou N (Não Aceite
      */
     private $aceite;
     /**
@@ -262,6 +262,11 @@ abstract class Banco
         $parte1 = substr($this->codigo, 0, 3);
         $parte2 = Modulo::modulo11($parte1);
         return $parte1 . "-" . $parte2;
+    }
+
+    public function getCarteiraFormatada()
+    {
+        return (2 == $this->getCarteiraModalidade() ? 'SR' : 'RG');
     }
 
     /**

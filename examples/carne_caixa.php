@@ -8,10 +8,10 @@ $oCedente->setAgencia("3366");
 $oCedente->setDvAgencia("9");
 $oCedente->setConta("443459");
 $oCedente->setDvConta("5");
-$oCedente->setEndereco("Rua Carlos Castro, N&ordm; 245, Centro");
+$oCedente->setEndereco("Rua Carlos Castro, Nº. 245, Centro");
 $oCedente->setCidade("Pinheiros");
 $oCedente->setUf("ES");
-$oCedente->setCpfCnpj("128.588.555-13");
+$oCedente->setCpfCnpj("25.328.654/0001-70");
 
 $oSacado = new \Simonetti\Boleto\Sacado();
 $oSacado->setNome("Nome Completo do Sacado");
@@ -26,6 +26,7 @@ $oSacado->setCep("29980-000");
 
 $banco = new \Simonetti\Boleto\Banco\Caixa();
 $banco->setCarteiraModalidade('1');
+$banco->setCarteira('RG');
 
 $carne = new \Simonetti\Boleto\Carne(
     $banco,
