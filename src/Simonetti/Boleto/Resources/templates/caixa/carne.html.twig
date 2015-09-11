@@ -89,6 +89,8 @@
         .sacado-avalista-inferior {
             width: 50px;
             padding-left: 5px;
+            padding-top: 2px;
+            vertical-align: top;
         }
 
         .texto-sacado-avalista-inferior {
@@ -96,12 +98,14 @@
         }
 
         .avalista-inferior {
+            padding-top: 5px;
             padding-bottom: 15px;
         }
 
         .instrucoes {
             font-weight: bold;
             width: 100%;
+            vertical-align: top;
         }
 
         .titulo {
@@ -210,7 +214,7 @@
                     <td class="valor com-borda-esquerda">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="titulo com-borda-esquerda com-borda-topo">(+) Mora/Multa</td>
+                    <td class="titulo com-borda-esquerda com-borda-topo">(+) Mora/Multa/Juros</td>
                 </tr>
                 <tr>
                     <td class="valor com-borda-esquerda">&nbsp;</td>
@@ -349,12 +353,10 @@
                     <td colspan="11" class="texto-sacado-avalista-inferior uppercase padding-negativo-nome-sacado">{{ boleto.sacado.tipoLogradouro }} {{ boleto.sacado.enderecoLogradouro }}, {{ boleto.sacado.numeroLogradouro }} - {{ boleto.sacado.bairro }} - {{ boleto.sacado.cidade }}/{{ boleto.sacado.uf }} - {{ boleto.sacado.cep }}</td>
                     <td class="com-borda-esquerda com-borda-baixo">&nbsp;</td>
                 </tr>
-                {% if '' != boleto.avalista.nome %}
-                    <tr>
-                        <td colspan="1" class="sacado-avalista-inferior avalista-inferior">Avalista:</td>
-                        <td colspan="11" class="texto-sacado-avalista-inferior avalista-inferior uppercase padding-negativo-nome-sacado">{{ boleto.avalista.nome }} - {{ boleto.avalista.cpfCnpj }}</td>
-                    </tr>
-                {% endif %}
+                <tr>
+                    <td colspan="1" class="sacado-avalista-inferior avalista-inferior">Avalista:</td>
+                    <td colspan="11" class="texto-sacado-avalista-inferior avalista-inferior uppercase padding-negativo-nome-sacado">{{ boleto.avalista.nome }} - {{ boleto.avalista.cpfCnpj }}</td>
+                </tr>
                 <tr>
                     <td rowspan="2" colspan="11" id="codigo-barras" class="com-borda-topo">
                         <img src="data:image/svg;base64,{{ codigoBarras }}"/>
