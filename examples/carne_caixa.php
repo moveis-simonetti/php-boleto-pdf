@@ -42,7 +42,9 @@ $carne->setNumeroMoeda("9");
 $carne->setDataDocumento(DateTime::createFromFormat('d/m/Y', "29/08/2015"));
 $carne->setDataProcessamento(new DateTime('now'));
 $carne->addDemonstrativo('Pagamento de Compra na Móveis Simonetti');
+$carne->addInstrucao(" ");
 $carne->addInstrucao("- Sr. Caixa, não receber após o vencimento");
+$carne->addInstrucao(" ");
 $carne->addInstrucao("- Pedido cancelado após o vencimento");
 $carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveissimonetti.com.br");
 
