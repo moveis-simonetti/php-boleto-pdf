@@ -251,7 +251,7 @@ class Boleto
     }
 
     /**
-     * @param Sacado $avalista
+     * @param Avalista $avalista
      */
     public function setAvalista($avalista)
     {
