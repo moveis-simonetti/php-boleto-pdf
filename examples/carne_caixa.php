@@ -3,29 +3,29 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 $oCedente = new \Simonetti\Boleto\Cedente();
-$oCedente->setNome("Loja Moveis Mix");
+$oCedente->setNome("LOJAS SIMONETTI LTDA");
 $oCedente->setAgencia("3366");
 $oCedente->setDvAgencia("9");
 $oCedente->setConta("443459");
 $oCedente->setDvConta("5");
-$oCedente->setEndereco("Rua Carlos Castro, Nº. 245, Centro");
-$oCedente->setCidade("Pinheiros");
+$oCedente->setEndereco("RUA CARLOS CASTRO, 245 - CENTRO - PINHEIROS/ES - 29980000");
+$oCedente->setCidade("PINHEIROS");
 $oCedente->setUf("ES");
-$oCedente->setCpfCnpj("25.328.654/0001-70");
+$oCedente->setCpfCnpj("31.743.818/0001-28");
 
 $oSacado = new \Simonetti\Boleto\Sacado();
 $oSacado->setNome("VINICIUS DE SÁ");
-$oSacado->setCpfCnpj("133.555.999-75");
-$oSacado->setTipoLogradouro("Rua");
-$oSacado->setEnderecoLogradouro("Bartolomeu da Gama");
+$oSacado->setCpfCnpj("144.840.167-45");
+$oSacado->setTipoLogradouro("AVENIDA");
+$oSacado->setEnderecoLogradouro("SETEMBIRNO PELISSARI");
 $oSacado->setNumeroLogradouro("100");
-$oSacado->setCidade("São Mateus");
-$oSacado->setBairro("Centro");
+$oSacado->setCidade("PINHEIROS");
+$oSacado->setBairro("CENTRO");
 $oSacado->setUf("ES");
 $oSacado->setCep("29980-000");
 
 
-$oAvalista = new \Simonetti\Boleto\Avalista('FRANK BRUNO', '133.555.999-75');
+$oAvalista = new \Simonetti\Boleto\Avalista('FRANK BRUNO', '133.567.677-55');
 
 $banco = new \Simonetti\Boleto\Banco\Caixa();
 $banco->setCarteiraModalidade('2');
@@ -43,15 +43,18 @@ $carne->setDataDocumento(DateTime::createFromFormat('d/m/Y', "29/08/2015"));
 $carne->setDataProcessamento(new DateTime('now'));
 $carne->addDemonstrativo('Pagamento de Compra na Móveis Simonetti');
 $carne->addInstrucao(" ");
-$carne->addInstrucao("- Sr. Caixa, não receber após o vencimento");
+$carne->addInstrucao("MULTA DE R$: 1,00 APÓS: 17/10/2015");
+$carne->addInstrucao("JUROS DE R$: 0,09 AO DIA");
 $carne->addInstrucao(" ");
-$carne->addInstrucao("- Pedido cancelado após o vencimento");
-$carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveissimonetti.com.br");
-
+$carne->addInstrucao("NÃO RECEBER APÓS 10 DIAS DO VENCIMENTO");
 
 $dataInicial = new DateTime('2015-09-01');
 
-for($i=1; $i<=20; $i++) {
+$boletosValidacao = [];
+
+$i = 1;
+
+while(10 != count($boletosValidacao)) {
 
     $dataVenciemento = clone $dataInicial;
 
@@ -60,10 +63,31 @@ for($i=1; $i<=20; $i++) {
     $parcela->setDataVencimento($dataVenciemento);
     $parcela->setNossoNumero($i);
     $parcela->setNumeroDocumento(100+$i);
-    $carne->addParcela($parcela);
 
-    $dataInicial->modify('+1 days');
+    $boletotmp = new \Simonetti\Boleto\Boleto();
+    $boletotmp->setBanco($carne->getBanco());
+    $boletotmp->setCedente($carne->getCedente());
+    $boletotmp->setSacado($carne->getSacado());
+    $boletotmp->setAvalista($carne->getAvalista());
+    $boletotmp->setNumeroDocumento($parcela->getNumeroDocumento());
+    $boletotmp->setNossoNumero($parcela->getNossoNumero());
+    $boletotmp->setDataVencimento($parcela->getDataVencimento() );
+    $boletotmp->setDataDocumento($carne->getDataDocumento());
+    $boletotmp->setDataProcessamento($carne->getDataProcessamento());
+    $boletotmp->setNumeroMoeda($carne->getNumeroMoeda());
+    $boletotmp->setValorBoleto($parcela->getValorBoleto());
 
+    $boletotmp->setDemonstrativos($carne->getDemonstrativos());
+    $boletotmp->setInstrucoes($carne->getInstrucoes());
+
+    $linha = substr($boletotmp->gerarLinhaDigitavel(), 35, 1);
+    if(!in_array($linha, $boletosValidacao)) {
+        $carne->addParcela($parcela);
+        $dataInicial->modify('+1 days');
+        $boletosValidacao[] = $linha;
+    }
+
+    $i++;
 }
 
 $loader = new Twig_Loader_Filesystem(\Simonetti\Boleto\Gerador::getDirImages() . '/../templates');

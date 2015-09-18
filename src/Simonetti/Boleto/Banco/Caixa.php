@@ -123,7 +123,6 @@ class Caixa extends Banco
 
     /**
      * @param $resto
-     * @param bool|false $permiteZero
      * @return int
      */
     private function tratarRestoDigitoVerificadorGeral($resto)
