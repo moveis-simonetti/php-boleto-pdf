@@ -14,7 +14,7 @@ $oCedente->setUf("ES");
 $oCedente->setCpfCnpj("25.328.654/0001-70");
 
 $oSacado = new \Simonetti\Boleto\Sacado();
-$oSacado->setNome("Nome Completo do Sacado");
+$oSacado->setNome("VINICIUS DE SÁ");
 $oSacado->setCpfCnpj("133.555.999-75");
 $oSacado->setTipoLogradouro("Rua");
 $oSacado->setEnderecoLogradouro("Bartolomeu da Gama");
@@ -28,8 +28,8 @@ $oSacado->setCep("29980-000");
 $oAvalista = new \Simonetti\Boleto\Avalista('FRANK BRUNO', '133.555.999-75');
 
 $banco = new \Simonetti\Boleto\Banco\Caixa();
-$banco->setCarteiraModalidade('1');
-$banco->setCarteira('RG');
+$banco->setCarteiraModalidade('2');
+$banco->setCarteira('SR');
 
 $carne = new \Simonetti\Boleto\Carne(
     $banco,
@@ -48,12 +48,23 @@ $carne->addInstrucao(" ");
 $carne->addInstrucao("- Pedido cancelado após o vencimento");
 $carne->addInstrucao("- Em caso de dúvidas entre em contato conosco: www.moveissimonetti.com.br");
 
-$parcela = new \Simonetti\Boleto\Carne\Parcela();
-$parcela->setValorBoleto('216,30');
-$parcela->setDataVencimento(new \DateTime('2015-09-29'));
-$parcela->setNossoNumero('1');
-$parcela->setNumeroDocumento('50165755');
-$carne->addParcela($parcela);
+
+$dataInicial = new DateTime('2015-09-01');
+
+for($i=1; $i<=20; $i++) {
+
+    $dataVenciemento = clone $dataInicial;
+
+    $parcela = new \Simonetti\Boleto\Carne\Parcela();
+    $parcela->setValorBoleto('10,00');
+    $parcela->setDataVencimento($dataVenciemento);
+    $parcela->setNossoNumero($i);
+    $parcela->setNumeroDocumento(100+$i);
+    $carne->addParcela($parcela);
+
+    $dataInicial->modify('+1 days');
+
+}
 
 $loader = new Twig_Loader_Filesystem(\Simonetti\Boleto\Gerador::getDirImages() . '/../templates');
 $twig = new Twig_Environment($loader);
