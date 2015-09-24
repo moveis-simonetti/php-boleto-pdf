@@ -94,4 +94,5 @@ $loader = new Twig_Loader_Filesystem(\Simonetti\Boleto\Gerador::getDirImages() .
 $twig = new Twig_Environment($loader);
 
 $geradorCarne = new \Simonetti\Boleto\GeradorCarne($twig);
-$geradorCarne->gerar($carne);
+$boleto = $geradorCarne->gerar($carne);
+$boleto->Output('boleto.pdf' , 'D');
