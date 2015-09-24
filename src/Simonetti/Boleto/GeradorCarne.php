@@ -25,9 +25,12 @@ class GeradorCarne extends Gerador
         $this->geradorCodigoBarras = new BarcodeGeneratorSVG();
     }
 
+    /**
+     * @param Carne $carne
+     * @return \mPDF
+     */
     public function gerar(Carne $carne)
     {
-
         $mpdf = new \mPDF("", 'A4');
 
         $mpdf->DeflMargin = 3;
@@ -37,7 +40,7 @@ class GeradorCarne extends Gerador
         /**
          * @var $boleto Boleto
          */
-        foreach($carne->getBoletos() as $boleto) {
+        foreach ($carne->getBoletos() as $boleto) {
 
             $codigoBarras = $this->geradorCodigoBarras->getBarcode(
                 $boleto->getLinha(),
@@ -57,7 +60,7 @@ class GeradorCarne extends Gerador
             $mpdf->WriteHTML($html);
             $mpdf->Ln(2);
         }
-        $mpdf->Output("boleto.pdf", 'D');
+        return $mpdf;
     }
 
 }
