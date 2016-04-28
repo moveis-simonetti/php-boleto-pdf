@@ -5,7 +5,7 @@ namespace Simonetti\Boleto;
 class Sacado
 {
     /**
-     * @var Nome
+     * @var string
      */
     private $nome;
 
@@ -50,7 +50,7 @@ class Sacado
     private $bairro;
 
     /**
-     * @return Nome
+     * @return string
      */
     public function getNome()
     {
@@ -58,7 +58,7 @@ class Sacado
     }
 
     /**
-     * @param Nome $nome
+     * @param string $nome
      */
     public function setNome($nome)
     {

@@ -29,6 +29,11 @@ class Parcela
     private $valorBoleto;
 
     /**
+     * @var array
+     */
+    private $instrucoes = [];
+
+    /**
      * @return \DateTime
      */
     public function getDataVencimento()
@@ -57,7 +62,7 @@ class Parcela
      */
     public function setNossoNumero($nossoNumero)
     {
-        $this->nossoNumero = str_pad($nossoNumero, 15, 0, STR_PAD_LEFT );
+        $this->nossoNumero = str_pad($nossoNumero, 15, 0, STR_PAD_LEFT);
     }
 
     /**
@@ -92,5 +97,16 @@ class Parcela
         $this->valorBoleto = $valorBoleto;
     }
 
+    public function addInstrucoes(array $instrucoes)
+    {
+        $this->instrucoes = $instrucoes;
+    }
 
+    /**
+     * @return array
+     */
+    public function getInstrucoes()
+    {
+        return $this->instrucoes;
+    }
 }
