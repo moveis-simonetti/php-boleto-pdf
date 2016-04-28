@@ -255,7 +255,7 @@ class Carne
             $boleto->setValorBoleto($parcela->getValorBoleto());
 
             $boleto->setDemonstrativos($this->demonstrativos);
-            $boleto->setInstrucoes($this->instrucoes);
+            $boleto->setInstrucoes($parcela->getInstrucoes());
 
             $boletos[] = $boleto;
         }
