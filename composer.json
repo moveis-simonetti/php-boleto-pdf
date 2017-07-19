@@ -18,7 +18,7 @@
     "require": {
         "php": ">=5.3.3",
         "itbz/fpdf": "~1.7",
-        "mpdf/mpdf": "~5",
+        "mpdf/mpdf": "~6",
         "twig/twig": "~1.0",
         "picqer/php-barcode-generator": "^0.1.0"
     },
